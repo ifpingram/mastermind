@@ -60,8 +60,14 @@ describe Mastermind do
     ## mastermind.solution = mastermind.generate_solution
   end
 
-  context "making guesses" do
+  context "making guesses: 1 slot, 1 color" do
     it "outputs correct color and position when the guess is correct" do
+      expect(Mastermind.new('G').check('G')).to eq([:match_color_and_position])
+    end
+  end
+
+  context "making guesses: 2 slots, 2 colors" do
+    xit "outputs correct color and position when the guess is correct" do
       # :no_match, :match_color, :match_color_and_position
       # given: assuming solution = 'RG'
       # when mastermind.guess 'RG' =>
@@ -69,11 +75,11 @@ describe Mastermind do
       expect(Mastermind.new('RG').check('RG')).to eq([:match_color_and_position, :match_color_and_position])
     end
 
-    it "outputs no match when the guess is incorrect" do
+    xit "outputs no match when the guess is incorrect" do
       expect(Mastermind.new('RR').check('GG')).to eq([:no_match, :no_match])
     end
 
-    it "outputs partial matches when the guess is correct colours but wrong position" do
+    xit "outputs partial matches when the guess is correct colours but wrong position" do
       expect(Mastermind.new('RG').check('GR')).to eq([:match_color, :match_color])
     end
   end
