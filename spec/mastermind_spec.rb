@@ -36,11 +36,8 @@
 # ‘h’ should be treated as help and should show the lexicon.
 # ‘q’ should be quit
 
-class DuplicateNotAllowedException < StandardError
-
-end
-
 class Mastermind
+  class DuplicateNotAllowedException < StandardError; end
 
   def initialize solution
     @solution = solution
@@ -49,24 +46,17 @@ class Mastermind
 
   def check guess
     guess_array = guess.split(//)
-    if guess_array.length - guess_array.uniq.length != 0 then raise DuplicateNotAllowedException end
-
-    # 'RG' => ['R','G']
-    # 'GG' => ['G', 'G']
-    # if sol[0] == guess[0] results << :match_color_and_position
+    raise Mastermind::DuplicateNotAllowedException if guess_array.length - guess_array.uniq.length != 0
 
     # 1. set array to no match
     result_array = Array.new(guess_array.length, :no_match)
 
-    # 2. check to see if colors exist
     guess_array.each_with_index do |guess_char,guess_index|
+      # 2. check to see if colors exist
       if @solution_array.include?(guess_char) then
         result_array[guess_index] = :match_color_not_position
       end
-    end
-
-    # 3. check to see if colours are in correct positions
-    guess_array.each_with_index do |guess_char,guess_index|
+      # 3. check to see if colours are in correct positions
       if guess_char == @solution_array[guess_index] then
         result_array[guess_index] = :match_color_and_position
       end
@@ -75,7 +65,6 @@ class Mastermind
     result_array
 
   end
-
 end
 
 describe Mastermind do
@@ -114,7 +103,7 @@ describe Mastermind do
     end
 
     it "throws and exception if the guess has duplicate colors" do
-      expect{Mastermind.new('RG').check('RR')}.to raise_error(DuplicateNotAllowedException)
+      expect{Mastermind.new('RG').check('RR')}.to raise_error(Mastermind::DuplicateNotAllowedException)
     end
   end
 
