@@ -49,15 +49,23 @@ class Mastermind
     # 'GG' => ['G', 'G']
     # if sol[0] == guess[0] results << :match_color_and_position
 
-    result_array = []
+    # 1. set array to no match
+    result_array = Array.new(guess_array.length, :no_match)
 
+    # 2. check to see if colors exist
     guess_array.each_with_index do |guess_char,guess_index|
-      if guess_char == @solution_array[guess_index] then
-        result_array << :match_color_and_position
-      else
-        result_array << :no_match
+      if @solution_array.include?(guess_char) then
+        result_array[guess_index] = :match_color_not_position
       end
     end
+
+    # 3. check to see if colours are in correct positions
+    guess_array.each_with_index do |guess_char,guess_index|
+      if guess_char == @solution_array[guess_index] then
+        result_array[guess_index] = :match_color_and_position
+      end
+    end
+
     result_array
 
   end
@@ -96,8 +104,13 @@ describe Mastermind do
     end
 
     it "outputs partial matches when the guess is correct colours but wrong position" do
-      expect(Mastermind.new('RG').check('GR')).to eq([:match_color, :match_color])
+      expect(Mastermind.new('RG').check('GR')).to eq([:match_color_not_position, :match_color_not_position])
     end
+
+    # RGGG (solution).  guess=RRRR [:match_color_and_position, :no_match, :no_match, :no_match]
+    # GGRG > RRRR
+    # guess[0] == solution[0] => results << [:mcap], temp_guess = [RRR], tmp_solution = 'GGG'
+    # results [:no_match, :no_match]
   end
 
 end
