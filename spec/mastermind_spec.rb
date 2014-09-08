@@ -72,6 +72,10 @@ describe Mastermind do
     it "outputs no match when the guess is incorrect" do
       expect(Mastermind.new('RR').check('GG')).to eq([:no_match, :no_match])
     end
+
+    it "outputs partial matches when the guess is correct colours but wrong position" do
+      expect(Mastermind.new('RG').check('GR')).to eq([:match_color, :match_color])
+    end
   end
 
 end
