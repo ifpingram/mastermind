@@ -106,11 +106,11 @@ describe Mastermind do
     it "outputs partial matches when the guess is correct colours but wrong position" do
       expect(Mastermind.new('RG').check('GR')).to eq([:match_color_not_position, :match_color_not_position])
     end
-
-    # RGGG (solution).  guess=RRRR [:match_color_and_position, :no_match, :no_match, :no_match]
-    # GGRG > RRRR
-    # guess[0] == solution[0] => results << [:mcap], temp_guess = [RRR], tmp_solution = 'GGG'
-    # results [:no_match, :no_match]
   end
 
+  context "making guesses: 2 slots, 3 colours" do
+    it "outputs [:no_match, :match_color_not_position] when solution is 'RG' and guess is 'GB'" do
+      expect(Mastermind.new('RG').check('GB')).to eq([:match_color_not_position, :no_match])
+    end
+  end
 end
