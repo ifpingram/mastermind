@@ -91,7 +91,7 @@ describe Mastermind do
       expect(Mastermind.new('RG').check('RG')).to eq([:match_color_and_position, :match_color_and_position])
     end
 
-    xit "outputs no match when the guess is incorrect" do
+    it "outputs no match when the guess is incorrect" do
       expect(Mastermind.new('RR').check('GG')).to eq([:no_match, :no_match])
     end
 
