@@ -49,11 +49,16 @@ class Mastermind
     # 'GG' => ['G', 'G']
     # if sol[0] == guess[0] results << :match_color_and_position
 
-    if guess_array[0] == @solution_array[0] then
-      [:match_color_and_position]
-    else
-      [:no_match]
+    result_array = []
+
+    guess_array.each_with_index do |guess_char,guess_index|
+      if guess_char == @solution_array[guess_index] then
+        result_array << :match_color_and_position
+      else
+        result_array << :no_match
+      end
     end
+    result_array
   end
 
 end
