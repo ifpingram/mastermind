@@ -90,7 +90,7 @@ describe Mastermind do
     end
   end
 
-  context "making guesses: 2 slots, 2 colors" do
+  context "making guesses: 2 slots, 4 colors" do
     it "outputs correct color and position when the guess is correct" do
       # :no_match, :match_color, :match_color_and_position
       # given: assuming solution = 'RG'
@@ -100,7 +100,7 @@ describe Mastermind do
     end
 
     it "outputs no match when the guess is incorrect" do
-      expect(Mastermind.new('RR').check('GG')).to eq([:no_match, :no_match])
+      expect(Mastermind.new('RG').check('BY')).to eq([:no_match, :no_match])
     end
 
     it "outputs partial matches when the guess is correct colours but wrong position" do
@@ -108,19 +108,9 @@ describe Mastermind do
     end
   end
 
-  context "making guesses: 2 slots, 3 colours" do
-    it "outputs [:no_match, :match_color_not_position] when solution is 'RG' and guess is 'GB'" do
-      expect(Mastermind.new('RG').check('GB')).to eq([:match_color_not_position, :no_match])
-    end
-
-    it "outputs [:no_match, :match_color_not_position] when solution is 'RG' and guess is 'GB'" do
-      expect(Mastermind.new('GR').check('BG')).to eq([:no_match, :match_color_not_position])
-    end
-
-    it "outputs [:no_match, :match_color_and_position] when solution is 'RG' and guess is 'BG'" do
-      expect(Mastermind.new('RG').check('BG')).to eq([:no_match, :match_color_and_position])
+  context "making guesses: 3 slots, 4 colors" do
+    it "outputs [:match_color_not_position, :match_color_not_position, :match_color_not_position] when solution is 'RGR' and guess is 'GRG'" do
+      expect(Mastermind.new('RGB').check('BRG')).to eq([:match_color_not_position, :match_color_not_position, :match_color_not_position])
     end
   end
-
-  #context "making guesses: 3 slots, 3 colors"
 end
