@@ -112,5 +112,9 @@ describe Mastermind do
     it "outputs [:no_match, :match_color_not_position] when solution is 'RG' and guess is 'GB'" do
       expect(Mastermind.new('RG').check('GB')).to eq([:match_color_not_position, :no_match])
     end
+
+    it "outputs [:no_match, :match_color_not_position] when solution is 'RG' and guess is 'GB'" do
+      expect(Mastermind.new('GR').check('BG')).to eq([:no_match, :match_color_not_position])
+    end
   end
 end
