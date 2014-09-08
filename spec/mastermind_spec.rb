@@ -95,7 +95,7 @@ describe Mastermind do
       expect(Mastermind.new('RR').check('GG')).to eq([:no_match, :no_match])
     end
 
-    xit "outputs partial matches when the guess is correct colours but wrong position" do
+    it "outputs partial matches when the guess is correct colours but wrong position" do
       expect(Mastermind.new('RG').check('GR')).to eq([:match_color, :match_color])
     end
   end
