@@ -43,6 +43,20 @@ end
 
 describe Mastermind do
 
-//it
+  it "///" do
+    mastermind = Mastermind.new
+    # mastermind.start
+    ## mastermind.solution = mastermind.generate_solution
+  end
+
+  context "making guesses" do
+    it "outputs correct color and position when the guess is correct" do
+      # :no_match, :match_color, :match_color_and_position
+      # given: assuming solution = 'RG'
+      # when mastermind.guess 'RG' =>
+      # # then output shoudl be: [:match_color_and_position, :match_color_and_position]
+      expect(Mastermind.new('RG').guess('RG')).to eq([:match_color_and_position, :match_color_and_position])
+    end
+  end
 
 end
