@@ -46,7 +46,7 @@ class Mastermind
     if guess == @solution then
       [:match_color_and_position]
     else
-      [:no_match, :no_match]
+      [:no_match]
     end
   end
 
