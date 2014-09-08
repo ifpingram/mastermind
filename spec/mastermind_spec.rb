@@ -44,7 +44,7 @@ class Mastermind
 
   def check guess
     if guess == @solution then
-      [:match_color_and_position, :match_color_and_position]
+      [:match_color_and_position]
     else
       [:no_match, :no_match]
     end
