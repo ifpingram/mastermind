@@ -64,6 +64,10 @@ describe Mastermind do
     it "outputs correct color and position when the guess is correct" do
       expect(Mastermind.new('G').check('G')).to eq([:match_color_and_position])
     end
+
+    it "outputs no match when the guess is incorrect" do
+      expect(Mastermind.new('G').check('R')).to eq([:no_match])
+    end
   end
 
   context "making guesses: 2 slots, 2 colors" do
