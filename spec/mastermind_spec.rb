@@ -42,7 +42,7 @@ class Mastermind
     @solution = solution
   end
 
-  def guess the_guess
+  def check guess
     [:match_color_and_position, :match_color_and_position]
   end
 
@@ -62,7 +62,7 @@ describe Mastermind do
       # given: assuming solution = 'RG'
       # when mastermind.guess 'RG' =>
       # # then output shoudl be: [:match_color_and_position, :match_color_and_position]
-      expect(Mastermind.new('RG').guess('RG')).to eq([:match_color_and_position, :match_color_and_position])
+      expect(Mastermind.new('RG').check('RG')).to eq([:match_color_and_position, :match_color_and_position])
     end
   end
 
