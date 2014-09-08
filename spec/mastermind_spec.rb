@@ -106,6 +106,10 @@ describe Mastermind do
     it "outputs partial matches when the guess is correct colours but wrong position" do
       expect(Mastermind.new('RG').check('GR')).to eq([:match_color_not_position, :match_color_not_position])
     end
+
+    it "throws and exception if the guess has duplicate colors" do
+      expect(Mastermind.new('RG').check('RR')).to raise(DuplicateNotAllowedException)
+    end
   end
 
   context "making guesses: 3 slots, 4 colors" do
