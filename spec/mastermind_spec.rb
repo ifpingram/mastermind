@@ -48,7 +48,8 @@ class Mastermind
     # 'RG' => ['R','G']
     # 'GG' => ['G', 'G']
     # if sol[0] == guess[0] results << :match_color_and_position
-    if guess == @solution then
+
+    if guess_array[0] == @solution_array[0] then
       [:match_color_and_position]
     else
       [:no_match]
