@@ -71,7 +71,7 @@ describe Mastermind do
   end
 
   context "making guesses: 2 slots, 2 colors" do
-    xit "outputs correct color and position when the guess is correct" do
+    it "outputs correct color and position when the guess is correct" do
       # :no_match, :match_color, :match_color_and_position
       # given: assuming solution = 'RG'
       # when mastermind.guess 'RG' =>
