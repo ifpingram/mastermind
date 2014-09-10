@@ -67,7 +67,7 @@ class Mastermind
   end
 
   def count_matches matches
-    raise Mastermind::InvalidInputException if matches == []
+    raise Mastermind::InvalidInputException if matches.empty?
     # if matches.includes other_than
     count_of_matches = {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 0}
 
@@ -118,7 +118,12 @@ describe Mastermind do
       it "raises a InvalidInputException if an empty array is passed in" do
         expect{Mastermind.new.count_matches([])}.to raise_error(Mastermind::InvalidInputException)
       end
+
       # [:foobar] -> invalid input array key
+      it "raises a InvalidInputException if an incorrect array key is passed in" do
+        expect{Mastermind.new.count_matches([:foobar])}.to raise_error(Mastermind::InvalidInputException)
+      end
+
       # {} -> invalid input data type (!Array)
 
 
