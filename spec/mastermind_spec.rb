@@ -39,6 +39,7 @@
 class Mastermind
   class DuplicateNotAllowedException < StandardError; end
   class InvalidInputException < StandardError; end
+  class InvalidInputTypeException < StandardError; end
 
   def initialize solution='RGBY'
     @solution = solution
@@ -68,6 +69,7 @@ class Mastermind
 
   def count_matches matches
     raise Mastermind::InvalidInputException if matches.empty?
+    raise Mastermind::InvalidInputTypeException unless matches.is_a?(Array)
     # if matches.includes other_than
     count_of_matches = {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 0}
 
