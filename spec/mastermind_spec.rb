@@ -75,6 +75,20 @@ describe Mastermind do
     ## mastermind.solution = mastermind.generate_solution
   end
 
+  #[:no_match, :match_color_and_position, :no_match, :match_color_not_position]
+  # COUNT => {:match_color_and_position => 1, :match_color_not_position => 1, :no_match => 2}
+  #
+  # SYMBOL = {:match_color_and_position => '@', :match_color_not_position => '+', :no_match => '.'}
+  # @+..
+  # SYMBOL[:match_color_and_position]*COUNT[:match_color_and_position]
+
+  context "remembering match type counts" do
+    it "finds 0 :match_color_and_position, 0 :match_color_not_position, 4 no_match when it receives an array of 4 :no_matches" do
+      expect(Mastermind.count_matches([:no_match, :no_match, :no_match, :no_match])).to
+        eq({:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 4})
+    end
+  end
+
   context "making guesses: 1 slot, 1 color" do
     it "outputs correct color and position when the guess is correct" do
       expect(Mastermind.new('G').check('G')).to eq([:match_color_and_position])
