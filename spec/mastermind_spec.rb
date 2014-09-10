@@ -96,6 +96,16 @@ describe Mastermind do
   # @+..
   # SYMBOL[:match_color_and_position]*COUNT[:match_color_and_position]
 
+  # result = new('G').check('G')
+  # count_matches(result) => [:match_color_and_position]
+  # format_guess(count_matches(result)) => '@'
+
+  context "outputting formatted counted matches" do
+    it "outputs '.' when the input is {:no_match => 1}" do
+      expect(Mastermind.new.format_counted_matches({:no_match=>1})).to eq('.')
+    end
+  end
+
   context "remembering match type counts" do
     it "finds 0 :match_color_and_position, 0 :match_color_not_position, 4 no_match when it receives an array of 4 :no_matches" do
       expect(Mastermind.new.count_matches([:no_match, :no_match, :no_match, :no_match]))
@@ -118,23 +128,20 @@ describe Mastermind do
     end
 
     context "testing input exception paths" do
-      # [] -> empty input array
       it "raises a InvalidInputException if an empty array is passed in" do
         expect{Mastermind.new.count_matches([])}.to raise_error(Mastermind::InvalidInputException)
       end
 
-      # [:foobar] -> invalid input array key
       it "raises a InvalidInputException if an incorrect array key is passed in" do
         expect{Mastermind.new.count_matches([:foobar])}.to raise_error(Mastermind::InvalidInputException)
       end
 
-      # {} -> invalid input data type (!Array)
       it "raises a InvalidInputTypeException if a hash is passed in" do
         expect{Mastermind.new.count_matches({:no_match => 0})}.to raise_error(Mastermind::InvalidInputTypeException)
       end
-
     end
   end
+
   context "making guesses: 1 slot, 1 color" do
     it "outputs correct color and position when the guess is correct" do
       expect(Mastermind.new('G').check('G')).to eq([:match_color_and_position])
