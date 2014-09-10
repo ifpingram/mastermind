@@ -89,7 +89,11 @@ class Mastermind
   end
 
   def attempt guess
-    '....'
+    if guess == @solution
+      '@@@@'
+    else
+      '....'
+    end
   end
 end
 
