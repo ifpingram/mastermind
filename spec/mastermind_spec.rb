@@ -46,7 +46,9 @@ class Mastermind
     @solution_array = solution.split(//)
   end
 
-  # verify input: 'RBGY', output: '@@+.'
+  def attempt guess
+    format_counted_matches(count_matches(check(guess)))
+  end
 
   def check guess
     guess_array = guess.split(//)
@@ -87,10 +89,6 @@ class Mastermind
   def format_counted_matches counted_matches
     counted_matches.map { |key,value| FORMAT_TEMPLATE[key]*value }.join
   end
-
-  def attempt guess
-    format_counted_matches(count_matches(check(guess)))
-  end
 end
 
 describe Mastermind do
@@ -113,8 +111,10 @@ describe Mastermind do
   # format_guess(count_matches(result)) => '@'
 
   context "verifying input with formatted output" do
-    it "outputs '....' when the solution is 'RGBO' and the guess is 'WXYZ'" do
-      expect(Mastermind.new('RGBO').attempt('WXYZ')).to eq('....')
+    {'RGBO'=>['WXYZ','....']}.each do |solution,attempt|
+      it "outputs '#{attempt[1]}' when the solution is #{solution} and the guess is '#{attempt[0]}'" do
+        expect(Mastermind.new(solution).attempt(attempt[0])).to eq(attempt[1])
+      end
     end
 
     it "outputs '@@@@' when the solution is 'RGBY' and the guess is 'RGBY'" do
