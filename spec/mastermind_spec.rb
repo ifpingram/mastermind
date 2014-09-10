@@ -89,13 +89,7 @@ class Mastermind
   end
 
   def attempt guess
-    matches = check guess
-
-    counted_matches = count_matches matches
-
-    formatted_counted_matches = format_counted_matches counted_matches
-
-    return formatted_counted_matches
+    format_counted_matches(count_matches(check(guess)))
   end
 end
 
