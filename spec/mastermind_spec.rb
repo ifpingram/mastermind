@@ -38,6 +38,7 @@
 
 class Mastermind
   class DuplicateNotAllowedException < StandardError; end
+  class InvalidInputException < StandardError; end
 
   def initialize solution='RGBY'
     @solution = solution
@@ -66,7 +67,7 @@ class Mastermind
   end
 
   def count_matches matches
-    # raise MatchSizeWrong if matches.length != 4
+    raise Mastermind::InvalidInputException if matches == []
     # if matches.includes other_than
     count_of_matches = {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 0}
 
@@ -115,7 +116,7 @@ describe Mastermind do
     context "testing input exception paths" do
       # [] -> empty input array
       it "raises a InvalidInputException if an empty array is passed in" do
-        expect{Mastermind.new.count_matches([])}.to raise_error(InvalidInputException)
+        expect{Mastermind.new.count_matches([])}.to raise_error(Mastermind::InvalidInputException)
       end
       # [:foobar] -> invalid input array key
       # {} -> invalid input data type (!Array)
