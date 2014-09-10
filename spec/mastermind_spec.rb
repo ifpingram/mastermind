@@ -72,11 +72,7 @@ class Mastermind
     count_of_matches = {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 0}
 
     matches.each do |match_type|
-      begin
-        count_of_matches[match_type] += 1
-      rescue
-        raise Mastermind::InvalidInputException
-      end
+      count_of_matches[match_type] += 1 rescue raise Mastermind::InvalidInputException
     end
 
     count_of_matches
