@@ -67,18 +67,13 @@ class Mastermind
 
   def count_matches matches
     # {:match_color_and_position => 1, :match_color_not_position => 1, :no_match => 2}
-    # counts = Hash.new 0
-    #
-    # words.each do |word|
-    #   counts[word] += 1
-    # end
+    count_of_matches = {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 0}
 
-    if matches == [:no_match, :no_match, :no_match, :no_match] then
-      {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 4}
-    else
-      {:match_color_and_position => 1, :match_color_not_position => 0, :no_match => 3}
+    matches.each do |match_type|
+      count_of_matches[match_type] += 1
     end
 
+    count_of_matches
   end
 end
 
