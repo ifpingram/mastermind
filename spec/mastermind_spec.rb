@@ -80,8 +80,10 @@ class Mastermind
     count_of_matches
   end
 
+  FORMAT_TEMPLATE = {:match_color_and_position => '@', :match_color_not_position => '+', :no_match => '.'}
+
   def format_counted_matches counted_matches
-    '.'
+    counted_matches.map { |key,value| FORMAT_TEMPLATE[key]*value }.join
   end
 end
 
