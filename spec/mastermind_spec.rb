@@ -116,6 +116,10 @@ describe Mastermind do
     it "outputs '....' when the solution is 'RRRR' and the guess is 'GGGG'" do
       expect(Mastermind.new('RRRR').attempt('GGGG')).to eq('....')
     end
+
+    it "outputs '@@@@' when the solution is 'RRRR' and the guess is 'RRRR'" do
+      expect(Mastermind.new('RRRR').attempt('RRRR')).to eq('@@@@')
+    end
   end
 
   context "outputting formatted counted matches" do
