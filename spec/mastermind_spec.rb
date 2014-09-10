@@ -46,6 +46,8 @@ class Mastermind
     @solution_array = solution.split(//)
   end
 
+  # verify input: 'RBGY', output: '@@+.'
+
   def check guess
     guess_array = guess.split(//)
     raise Mastermind::DuplicateNotAllowedException if guess_array.length - guess_array.uniq.length != 0
@@ -105,6 +107,12 @@ describe Mastermind do
   # result = new('G').check('G')
   # count_matches(result) => [:match_color_and_position]
   # format_guess(count_matches(result)) => '@'
+
+  context "verifying input with formatted output" do
+    it "outputs '....' when the solution is 'RRRR' and the guess is 'GGGG'" do
+      expect(Mastermind.new('RRRR').verify('GGGG')).to eq('....')
+    end
+  end
 
   context "outputting formatted counted matches" do
     it "outputs '.' when the input is {:no_match => 1}" do
