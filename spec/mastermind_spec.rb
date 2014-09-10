@@ -67,7 +67,18 @@ class Mastermind
 
   def count_matches matches
     # {:match_color_and_position => 1, :match_color_not_position => 1, :no_match => 2}
-    {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 4}
+    # counts = Hash.new 0
+    #
+    # words.each do |word|
+    #   counts[word] += 1
+    # end
+
+    if matches == [:no_match, :no_match, :no_match, :no_match] then
+      {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 4}
+    else
+      {:match_color_and_position => 1, :match_color_not_position => 0, :no_match => 3}
+    end
+
   end
 end
 
@@ -90,6 +101,11 @@ describe Mastermind do
     it "finds 0 :match_color_and_position, 0 :match_color_not_position, 4 no_match when it receives an array of 4 :no_matches" do
       expect(Mastermind.new.count_matches([:no_match, :no_match, :no_match, :no_match]))
         .to eq({:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 4})
+    end
+
+    it "finds 1 :match_color_and_position, 0 :match_color_not_position, 3 no_match when it receives an array of 1 :match_color_and_position and 3 :no_matches" do
+      expect(Mastermind.new.count_matches([:match_color_and_position, :no_match, :no_match, :no_match]))
+      .to eq({:match_color_and_position => 1, :match_color_not_position => 0, :no_match => 3})
     end
   end
 
