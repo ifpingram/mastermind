@@ -89,11 +89,13 @@ class Mastermind
   end
 
   def attempt guess
-    if guess == @solution
-      '@@@@'
-    else
-      '....'
-    end
+    matches = check guess
+
+    counted_matches = count_matches matches
+
+    formatted_counted_matches = format_counted_matches counted_matches
+
+    return formatted_counted_matches
   end
 end
 
@@ -117,12 +119,12 @@ describe Mastermind do
   # format_guess(count_matches(result)) => '@'
 
   context "verifying input with formatted output" do
-    it "outputs '....' when the solution is 'RRRR' and the guess is 'GGGG'" do
-      expect(Mastermind.new('RRRR').attempt('GGGG')).to eq('....')
+    it "outputs '....' when the solution is 'RGBO' and the guess is 'WXYZ'" do
+      expect(Mastermind.new('RGBO').attempt('WXYZ')).to eq('....')
     end
 
-    it "outputs '@@@@' when the solution is 'RRRR' and the guess is 'RRRR'" do
-      expect(Mastermind.new('RRRR').attempt('RRRR')).to eq('@@@@')
+    it "outputs '@@@@' when the solution is 'RGBY' and the guess is 'RGBY'" do
+      expect(Mastermind.new('RGBY').attempt('RGBY')).to eq('@@@@')
     end
   end
 
