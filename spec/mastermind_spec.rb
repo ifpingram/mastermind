@@ -66,7 +66,8 @@ class Mastermind
   end
 
   def count_matches matches
-    # {:match_color_and_position => 1, :match_color_not_position => 1, :no_match => 2}
+    # raise MatchSizeWrong if matches.length != 4
+    # if matches.includes other_than
     count_of_matches = {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 0}
 
     matches.each { |match_type| count_of_matches[match_type] += 1 }
@@ -104,6 +105,22 @@ describe Mastermind do
     it "finds 1 :match_color_and_position, 0 :match_color_not_position, 0 :no_match when it receives an array of 1 :match_color_and_position" do
       expect(Mastermind.new.count_matches([:match_color_and_position]))
       .to eq({:match_color_and_position => 1, :match_color_not_position => 0, :no_match => 0})
+    end
+
+    it "finds 1 :match_color_and_position, 0 :match_color_not_position, 0 :no_match when it receives an array of 1 :match_color_and_position" do
+      expect(Mastermind.new.count_matches([:match_color_and_position]))
+      .to eq({:match_color_and_position => 1, :match_color_not_position => 0, :no_match => 0})
+    end
+
+    context "testing input exception paths" do
+      # [] -> empty input array
+      it "raises a InvalidInputException if an empty array is passed in" do
+        expect{Mastermind.new.count_matches([])}.to raise_error(InvalidInputException)
+      end
+      # [:foobar] -> invalid input array key
+      # {} -> invalid input data type (!Array)
+
+
     end
   end
   context "making guesses: 1 slot, 1 color" do
