@@ -69,9 +69,7 @@ class Mastermind
     # {:match_color_and_position => 1, :match_color_not_position => 1, :no_match => 2}
     count_of_matches = {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 0}
 
-    matches.each do |match_type|
-      count_of_matches[match_type] += 1
-    end
+    matches.each { |match_type| count_of_matches[match_type] += 1 }
 
     count_of_matches
   end
