@@ -108,6 +108,10 @@ describe Mastermind do
     it "outputs '.' when the input is {:no_match => 1}" do
       expect(Mastermind.new.format_counted_matches({:no_match=>1})).to eq('.')
     end
+
+    it "outputs '+' when the input is {:match_color_not_position => 1}" do
+      expect(Mastermind.new.format_counted_matches({:match_color_not_position=>1})).to eq('+')
+    end
   end
 
   context "remembering match type counts" do
