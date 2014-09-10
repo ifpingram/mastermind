@@ -79,6 +79,10 @@ class Mastermind
 
     count_of_matches
   end
+
+  def format_counted_matches counted_matches
+    '.'
+  end
 end
 
 describe Mastermind do
