@@ -111,26 +111,15 @@ describe Mastermind do
   # format_guess(count_matches(result)) => '@'
 
   context "verifying input with formatted output" do
-    {'RGBO'=>['WXYZ','....']}.each do |solution,attempt|
-      it "outputs '#{attempt[1]}' when the solution is #{solution} and the guess is '#{attempt[0]}'" do
+    {'RGBO'=>['WXYZ','....'],
+     'RGBY'=>['RGBY','@@@@'],
+     'RGBY'=>['RGYO','@@+.'],
+     'RGBYOZ'=>['RGYBIJ','@@++..'],
+     'R'=>['R','@'],
+    }.each do |solution,attempt|
+      it "outputs '#{attempt[1]}' when the solution is '#{solution}' and the guess is '#{attempt[0]}'" do
         expect(Mastermind.new(solution).attempt(attempt[0])).to eq(attempt[1])
       end
-    end
-
-    it "outputs '@@@@' when the solution is 'RGBY' and the guess is 'RGBY'" do
-      expect(Mastermind.new('RGBY').attempt('RGBY')).to eq('@@@@')
-    end
-
-    it "outputs '@@+.' when the solution is 'RGBY' and the guess is 'RGYO'" do
-      expect(Mastermind.new('RGBY').attempt('RGYO')).to eq('@@+.')
-    end
-
-    it "outputs '@@++..' when the solution is 'RGBYOZ' and the guess is 'RGYBIJ'" do
-      expect(Mastermind.new('RGBYOZ').attempt('RGYBIJ')).to eq('@@++..')
-    end
-
-    it "outputs '@' when the solution is 'R' and the guess is 'R'" do
-      expect(Mastermind.new('R').attempt('R')).to eq('@')
     end
   end
 
