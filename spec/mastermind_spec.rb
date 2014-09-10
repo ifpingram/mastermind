@@ -100,8 +100,12 @@ describe Mastermind do
       expect(Mastermind.new.count_matches([:match_color_and_position, :no_match, :no_match, :no_match]))
       .to eq({:match_color_and_position => 1, :match_color_not_position => 0, :no_match => 3})
     end
-  end
 
+    it "finds 1 :match_color_and_position, 0 :match_color_not_position, 0 :no_match when it receives an array of 1 :match_color_and_position" do
+      expect(Mastermind.new.count_matches([:match_color_and_position]))
+      .to eq({:match_color_and_position => 1, :match_color_not_position => 0, :no_match => 0})
+    end
+  end
   context "making guesses: 1 slot, 1 color" do
     it "outputs correct color and position when the guess is correct" do
       expect(Mastermind.new('G').check('G')).to eq([:match_color_and_position])
