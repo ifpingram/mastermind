@@ -127,7 +127,9 @@ describe Mastermind do
       end
 
       # {} -> invalid input data type (!Array)
-
+      it "raises a InvalidInputTypeException if a hash is passed in" do
+        expect{Mastermind.new.count_matches({:no_match => 0})}.to raise_error(Mastermind::InvalidInputTypeException)
+      end
 
     end
   end
