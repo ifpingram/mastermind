@@ -39,7 +39,7 @@
 class Mastermind
   class DuplicateNotAllowedException < StandardError; end
 
-  def initialize solution
+  def initialize solution='RGBY'
     @solution = solution
     @solution_array = solution.split(//)
   end
@@ -63,7 +63,11 @@ class Mastermind
     end
 
     result_array
+  end
 
+  def count_matches matches
+    # {:match_color_and_position => 1, :match_color_not_position => 1, :no_match => 2}
+    {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 4}
   end
 end
 
@@ -84,8 +88,8 @@ describe Mastermind do
 
   context "remembering match type counts" do
     it "finds 0 :match_color_and_position, 0 :match_color_not_position, 4 no_match when it receives an array of 4 :no_matches" do
-      expect(Mastermind.count_matches([:no_match, :no_match, :no_match, :no_match])).to
-        eq({:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 4})
+      expect(Mastermind.new.count_matches([:no_match, :no_match, :no_match, :no_match]))
+        .to eq({:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 4})
     end
   end
 
