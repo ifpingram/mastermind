@@ -124,6 +124,10 @@ describe Mastermind do
     it "outputs '@@+.' when the solution is 'RGBY' and the guess is 'RGYO'" do
       expect(Mastermind.new('RGBY').attempt('RGYO')).to eq('@@+.')
     end
+
+    it "outputs '@@++..' when the solution is 'RGBYOZ' and the guess is 'RGYBIJ'" do
+      expect(Mastermind.new('RGBYOZ').attempt('RGYBIJ')).to eq('@@++..')
+    end
   end
 
   context "outputting formatted counted matches" do
