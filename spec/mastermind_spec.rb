@@ -56,11 +56,15 @@ class Mastermind
     guess_array = guess.split(//)
     raise Mastermind::DuplicateNotAllowedException if guess_array.length - guess_array.uniq.length != 0
 
+      # guess_solution = MastermindSolution.new(guess)
+    # return :success if @solution == guess_solution
+
     # 1. set array to no match
     result_array = Array.new(guess_array.length, :no_match)
 
     guess_array.each_with_index do |guess_char,guess_index|
       # 2. check to see if colors exist
+      # if @solution.has_character(guess_char) then
       if @solution_array.include?(guess_char) then
         result_array[guess_index] = :match_color_not_position
       end
@@ -117,7 +121,8 @@ describe Mastermind do
      'R'=>['R','@'],
     }.each do |solution,attempt|
       it "outputs '#{attempt[1]}' when the solution is '#{solution}' and the guess is '#{attempt[0]}'" do
-        expect(Mastermind.new(solution).attempt(attempt[0])).to eq(attempt[1])
+        allow_any_instance_of(Array).to receive(:shuffle) { solution.split(//) }
+        expect(Mastermind.new(MastermindSolution.new({:choices => solution, :guess_length => 4})).attempt(attempt[0])).to eq(attempt[1])
       end
     end
   end
