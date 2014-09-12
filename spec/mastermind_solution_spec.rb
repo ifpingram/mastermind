@@ -32,6 +32,10 @@ describe MastermindSolution do
     it "creates and object with a solution of 'G' with the inputs 'G' and 1" do
       expect(MastermindSolution.new({:choices => 'G', :guess_length => 1}).to_s).to eq('G')
     end
+
+    it "creates and object with a solution of 'B' with the inputs 'B' and 1" do
+      expect(MastermindSolution.new({:choices => 'B', :guess_length => 1}).to_s).to eq('B')
+    end
   end
 
 end
