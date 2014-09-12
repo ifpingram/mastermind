@@ -1,6 +1,12 @@
 class MastermindSolution
 
+  def initialize params
 
+  end
+
+  def to_s
+    'R'
+  end
 
 end
 
