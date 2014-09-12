@@ -56,9 +56,14 @@ describe MastermindSolution do
       expect(MastermindSolution.new({:choices => 'RG', :guess_length => 1}).to_s).to eq('R')
     end
 
-    it "creates and object with a solution of 'R' with the inputs 'RG' and 1" do
+    it "creates and object with a solution of 'G' with the inputs 'RG' and 1" do
       allow_any_instance_of(Array).to receive(:shuffle) { ['G','R'] }
       expect(MastermindSolution.new({:choices => 'RG', :guess_length => 1}).to_s).to eq('G')
+    end
+
+    it "creates and object with a solution of 'BG' with the inputs 'RGB' and 2" do
+      allow_any_instance_of(Array).to receive(:shuffle) { ['B','G', 'R'] }
+      expect(MastermindSolution.new({:choices => 'RGB', :guess_length => 2}).to_s).to eq('BG')
     end
   end
 
