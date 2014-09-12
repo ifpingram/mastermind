@@ -1,5 +1,7 @@
 class MastermindSolution
 
+
+
 end
 
 # class MastermindGuess
@@ -14,8 +16,10 @@ end
 
 describe MastermindSolution do
 
-  context "generate random solution to attempt against" do
-    it ""
+  context "generate solution based upon possibilities input" do
+    it "creates and object with a solution of 'R' with the inputs 'R' and 1" do
+      expect(MastermindSolution.new({:choices => 'R', :guess_length => 1}).to_s).to eq('R')
+    end
   end
 
 end
