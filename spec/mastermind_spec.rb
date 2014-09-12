@@ -45,7 +45,6 @@ class Mastermind
 
   def initialize solution=MastermindSolution.new({:choices => 'RG', :guess_length => 1})
     @solution = solution
-    @solution_array = solution.to_s.split(//)
   end
 
   def attempt guess
@@ -65,11 +64,11 @@ class Mastermind
     guess_array.each_with_index do |guess_char,guess_index|
       # 2. check to see if colors exist
       # if @solution.has_character(guess_char) then
-      if @solution_array.include?(guess_char) then
+      if @solution.to_a.include?(guess_char) then
         result_array[guess_index] = :match_color_not_position
       end
       # 3. check to see if colours are in correct positions
-      if guess_char == @solution_array[guess_index] then
+      if guess_char == @solution.to_a[guess_index] then
         result_array[guess_index] = :match_color_and_position
       end
     end
