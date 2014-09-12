@@ -1,14 +1,28 @@
 class MastermindSolution
 
-  attr_reader :solution
+  attr_reader :choices, :guess_length, :solution
 
   def initialize params
-    @solution = params[:choices]
+    @choices = params[:choices]
+    @guess_length = params[:guess_length]
+    solution_array = choices.split(//)
+    randomized_array = solution_array.shuffle
+    output_array = []
+    guess_length.times { output_array << randomized_array.shift }
+    @solution = output_array.join
+    # count = params[:guess_length]
+    # solution_array = @solution.to_array.shuffle
+    # count.times { solution_array.shift }
   end
 
   def to_s
     solution.to_s
   end
+
+  # 'RGBY'
+  # array = ['R,'G','B','Y']
+  # array.shuffle => known stat
+  # .randomize, array.pop => last element and removes it from the list
 
 end
 
@@ -35,6 +49,20 @@ describe MastermindSolution do
 
     it "creates and object with a solution of 'B' with the inputs 'B' and 1" do
       expect(MastermindSolution.new({:choices => 'B', :guess_length => 1}).to_s).to eq('B')
+    end
+
+    xit "creates and object with a solution of 'R' with the inputs 'RG' and 1" do
+      # Kernel.stubs(:shuffle)
+      # stub reality so that the randomness returns ['R','G']
+      # assumption is: I'm pulling choices off the front of the randomized array of choices
+      expect(MastermindSolution.new({:choices => 'RG', :guess_length => 1}).to_s).to eq('R')
+    end
+
+    it "creates and object with a solution of 'R' with the inputs 'RG' and 1" do
+      allow_any_instance_of(Array).to receive(:shuffle) { ['G','R'] }
+      # stub reality so that the randomness returns ['G','R']
+      # assumption is: I'm pulling choices off the front of the randomized array of choices
+      expect(MastermindSolution.new({:choices => 'RG', :guess_length => 1}).to_s).to eq('G')
     end
   end
 
