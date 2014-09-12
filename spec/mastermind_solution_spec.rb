@@ -1,11 +1,13 @@
 class MastermindSolution
 
-  def initialize params
+  attr_reader :solution
 
+  def initialize params
+    @solution = params[:choices]
   end
 
   def to_s
-    'R'
+    solution.to_s
   end
 
 end
