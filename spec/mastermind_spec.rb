@@ -36,6 +36,7 @@
 # ‘h’ should be treated as help and should show the lexicon.
 # ‘q’ should be quit
 
+
 class Mastermind
   class DuplicateNotAllowedException < StandardError; end
   class InvalidInputException < StandardError; end
@@ -99,16 +100,13 @@ describe Mastermind do
     ## mastermind.solution = mastermind.generate_solution
   end
 
-  #[:no_match, :match_color_and_position, :no_match, :match_color_not_position]
-  # COUNT => {:match_color_and_position => 1, :match_color_not_position => 1, :no_match => 2}
-  #
-  # SYMBOL = {:match_color_and_position => '@', :match_color_not_position => '+', :no_match => '.'}
-  # @+..
-  # SYMBOL[:match_color_and_position]*COUNT[:match_color_and_position]
+  # instantiate game
+  # generate random solution
+  # output STDIN cursor
+  # receive STDIN
+  # attempt solution
+  # output result
 
-  # result = new('G').check('G')
-  # count_matches(result) => [:match_color_and_position]
-  # format_guess(count_matches(result)) => '@'
 
   context "verifying input with formatted output" do
     {'RGBO'=>['WXYZ','....'],
