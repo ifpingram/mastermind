@@ -51,17 +51,13 @@ describe MastermindSolution do
       expect(MastermindSolution.new({:choices => 'B', :guess_length => 1}).to_s).to eq('B')
     end
 
-    xit "creates and object with a solution of 'R' with the inputs 'RG' and 1" do
-      # Kernel.stubs(:shuffle)
-      # stub reality so that the randomness returns ['R','G']
-      # assumption is: I'm pulling choices off the front of the randomized array of choices
+    it "creates and object with a solution of 'R' with the inputs 'RG' and 1" do
+      allow_any_instance_of(Array).to receive(:shuffle) { ['R','G'] }
       expect(MastermindSolution.new({:choices => 'RG', :guess_length => 1}).to_s).to eq('R')
     end
 
     it "creates and object with a solution of 'R' with the inputs 'RG' and 1" do
       allow_any_instance_of(Array).to receive(:shuffle) { ['G','R'] }
-      # stub reality so that the randomness returns ['G','R']
-      # assumption is: I'm pulling choices off the front of the randomized array of choices
       expect(MastermindSolution.new({:choices => 'RG', :guess_length => 1}).to_s).to eq('G')
     end
   end
