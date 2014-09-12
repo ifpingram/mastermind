@@ -36,15 +36,16 @@
 # ‘h’ should be treated as help and should show the lexicon.
 # ‘q’ should be quit
 
+require 'mastermind_solution'
 
 class Mastermind
   class DuplicateNotAllowedException < StandardError; end
   class InvalidInputException < StandardError; end
   class InvalidInputTypeException < StandardError; end
 
-  def initialize solution='RGBY'
+  def initialize solution=MastermindSolution.new({:choices => 'RG', :guess_length => 1})
     @solution = solution
-    @solution_array = solution.split(//)
+    @solution_array = solution.to_s.split(//)
   end
 
   def attempt guess
