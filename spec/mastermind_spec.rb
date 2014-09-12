@@ -112,7 +112,6 @@ describe Mastermind do
   # attempt solution
   # output result
 
-
   context "verifying input with formatted output" do
     {'RGBO'=>['WXYZ','....'],
      'RGBY'=>['RGBY','@@@@'],
@@ -191,39 +190,39 @@ describe Mastermind do
 
   context "making guesses: 1 slot, 1 color" do
     it "outputs correct color and position when the guess is correct" do
-      expect(Mastermind.new('G').check('G')).to eq([:match_color_and_position])
+      expect(Mastermind.new(MastermindSolution.new({:choices => 'G', :guess_length => 1})).check('G')).to eq([:match_color_and_position])
     end
 
     it "outputs no match when the guess is incorrect" do
-      expect(Mastermind.new('G').check('R')).to eq([:no_match])
+      expect(Mastermind.new(MastermindSolution.new({:choices => 'G', :guess_length => 1})).check('R')).to eq([:no_match])
     end
   end
 
   context "making guesses: 2 slots, 4 colors" do
     it "outputs correct color and position when the guess is correct" do
-      # :no_match, :match_color, :match_color_and_position
-      # given: assuming solution = 'RG'
-      # when mastermind.guess 'RG' =>
-      # # then output shoudl be: [:match_color_and_position, :match_color_and_position]
-      expect(Mastermind.new('RG').check('RG')).to eq([:match_color_and_position, :match_color_and_position])
+      allow_any_instance_of(Array).to receive(:shuffle) { ['R', 'G'] }
+      expect(Mastermind.new(MastermindSolution.new({:choices => 'RG', :guess_length => 2})).check('RG')).to eq([:match_color_and_position, :match_color_and_position])
     end
 
     it "outputs no match when the guess is incorrect" do
-      expect(Mastermind.new('RG').check('BY')).to eq([:no_match, :no_match])
+      allow_any_instance_of(Array).to receive(:shuffle) { ['R', 'G'] }
+      expect(Mastermind.new(MastermindSolution.new({:choices => 'RG', :guess_length => 2})).check('BY')).to eq([:no_match, :no_match])
     end
 
     it "outputs partial matches when the guess is correct colours but wrong position" do
-      expect(Mastermind.new('RG').check('GR')).to eq([:match_color_not_position, :match_color_not_position])
+      allow_any_instance_of(Array).to receive(:shuffle) { ['R', 'G'] }
+      expect(Mastermind.new(MastermindSolution.new({:choices => 'RG', :guess_length => 2})).check('GR')).to eq([:match_color_not_position, :match_color_not_position])
     end
 
     it "throws and exception if the guess has duplicate colors" do
-      expect{Mastermind.new('RG').check('RR')}.to raise_error(Mastermind::DuplicateNotAllowedException)
+      expect{Mastermind.new(MastermindSolution.new({:choices => 'RG', :guess_length => 2})).check('RR')}.to raise_error(Mastermind::DuplicateNotAllowedException)
     end
   end
 
   context "making guesses: 3 slots, 4 colors" do
     it "outputs [:match_color_not_position, :match_color_not_position, :match_color_not_position] when solution is 'RGR' and guess is 'GRG'" do
-      expect(Mastermind.new('RGB').check('BRG')).to eq([:match_color_not_position, :match_color_not_position, :match_color_not_position])
+      allow_any_instance_of(Array).to receive(:shuffle) { ['R', 'G', 'B', 'Y'] }
+      expect(Mastermind.new(MastermindSolution.new({:choices => 'RGB', :guess_length => 3})).check('BRG')).to eq([:match_color_not_position, :match_color_not_position, :match_color_not_position])
     end
   end
 end
