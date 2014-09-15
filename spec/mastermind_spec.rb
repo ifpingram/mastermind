@@ -55,7 +55,7 @@ class Mastermind
 
   def check guess
     guess_array = guess.split(//)
-    raise Mastermind::DuplicateNotAllowedException if guess_array.length - guess_array.uniq.length != 0
+    # raise Mastermind::DuplicateNotAllowedException if guess_array.length - guess_array.uniq.length != 0
 
     # 1. set array to no match
     result_array = Array.new(guess_array.length, :no_match)
@@ -96,19 +96,12 @@ end
 
 describe Mastermind do
 
-  xit "///" do
-    mastermind = Mastermind.new
-    # mastermind.start
-    ## mastermind.solution = mastermind.generate_solution
-  end
-
   # instantiate game
   # generate random solution
   # output STDIN cursor
   # receive STDIN
   # attempt solution
   # output result
-
 
   # solution: RGRY
   # Guess: RBYB
@@ -154,9 +147,12 @@ describe Mastermind do
 
   context "allow duplicates in the solution" do
     it "returns 4 no matches if the solution is 'RRRR' and the guess is 'BBBB'" do
-      expect(Mastermind.new(MastermindSolution.new({:solution_choices => 'RRRR', :solution_length => 4})).attempt('BBBB')).to eq(['....'])
+      expect(Mastermind.new(MastermindSolution.new({:solution_choices => 'RRRR', :solution_length => 4})).attempt('BBBB')).to eq('....')
     end
 
+    it "returns 4 match colour and position if the solution is 'RRRR' and the guess is 'RRRR'" do
+      expect(Mastermind.new(MastermindSolution.new({:solution_choices => 'RRRR', :solution_length => 4})).attempt('RRRR')).to eq('@@@@')
+    end
   end
 
 
@@ -262,9 +258,6 @@ describe Mastermind do
       expect(Mastermind.new(MastermindSolution.new({:solution_choices => 'RG', :solution_length => 2})).check('GR')).to eq([:match_color_not_position, :match_color_not_position])
     end
 
-    it "throws and exception if the guess has duplicate colors" do
-      expect{Mastermind.new(MastermindSolution.new({:solution_choices => 'RG', :solution_length => 2})).check('RR')}.to raise_error(Mastermind::DuplicateNotAllowedException)
-    end
   end
 
   context "making guesses: 3 slots, 4 colors" do
