@@ -3,8 +3,8 @@ class MastermindSolution
   attr_reader :solution
 
   def initialize params
-    randomized_array = params[:choices].split(//).shuffle
-    @solution = randomized_array.slice(0,params[:guess_length])
+    randomized_array = params[:solution_choices].split(//).shuffle
+    @solution = randomized_array.slice(0,params[:solution_length])
   end
 
   def to_a
