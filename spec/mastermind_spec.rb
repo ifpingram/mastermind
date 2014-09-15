@@ -51,6 +51,8 @@ class Mastermind
     format_counted_matches(count_matches(check(guess)))
   end
 
+  # private
+
   def check guess
     guess_array = guess.split(//)
     raise Mastermind::DuplicateNotAllowedException if guess_array.length - guess_array.uniq.length != 0
@@ -106,6 +108,57 @@ describe Mastermind do
   # receive STDIN
   # attempt solution
   # output result
+
+
+  # solution: RGRY
+  # Guess: RBYB
+  # 1 match with position (1st R)
+  # 1 match without pisition (Y)
+
+  # solution: RGRY
+  # guess: RRBB
+  # 1 match with position (1st R)
+  # 2nd R is match without position
+  # Y is match without position
+
+  # solution: RGBY
+  # guess: RRBB
+  # 1 m_with_pos
+  # 1 w_wout_pos
+
+  # guess: ZZRR
+  # 2 w_wout_pos
+
+  # sol: RRRR
+  # guess: BBBB
+
+  # sol: RGBY
+  # guess: ORRO
+  # 1 match without position
+
+  # sol: RRBY
+  # guess: OORR
+  # 2 match without position
+
+  # sol: RRBY
+  # guess: OOOR
+  # 1 match without position
+
+  # sol: [slot1: R, slot2: R, slot3: B, slot4: Y]
+  # guess: 'ORRO' => slot1: O. nope, slot2: R. yes <= mark slot 2 in the guess as 'used' to connect to slot1 in the solution?
+  # slot2 sol: 'R', does that match slot2 of the guess? nope. Scan the guess for an 'R'
+
+  # loop guess
+  # does guess.x = solution.x ? if yes delete solution.x, loop guess
+  #                             if no, loop solution.x+1 > solution.end, does guess.x = solution.i
+
+  context "allow duplicates in the solution" do
+    it "returns 4 no matches if the solution is 'RRRR' and the guess is 'BBBB'" do
+      expect(Mastermind.new(MastermindSolution.new({:solution_choices => 'RRRR', :solution_length => 4})).attempt('BBBB')).to eq(['....'])
+    end
+
+  end
+
 
   context "verifying input with formatted output" do
     {'RGBO'=>['WXYZ','....'],

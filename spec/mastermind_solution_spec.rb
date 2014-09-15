@@ -3,17 +3,12 @@ require 'mastermind_solution'
 describe MastermindSolution do
 
   context "test random samples for randomness" do
-    # test the MastermindSolution initializer that it randomizes the input array relatively evenly
-    # 1000x.MastermindSolution.new('RGBY') should output each first character approximately 25%
-    # expect within 5% of 25% for the test of each R,G,B,Y
-
     before :all do
       @results = Hash.new(0) # defaults to zero
       1000.times do
         solution = MastermindSolution.new({:solution_choices => 'RGBO', :solution_length => 1}).to_s
         @results[solution] += 1
       end
-      puts @results
     end
 
     it "creates the solution with the first character of 'R' approximately 25% of the time" do
@@ -21,7 +16,20 @@ describe MastermindSolution do
       expect(percentage).to be_within(2).of(25)
     end
 
+    it "creates the solution with the first character of 'G' approximately 25% of the time" do
+      percentage = (@results['G'] / 1000.0) * 100
+      expect(percentage).to be_within(2).of(25)
+    end
 
+    it "creates the solution with the first character of 'B' approximately 25% of the time" do
+      percentage = (@results['B'] / 1000.0) * 100
+      expect(percentage).to be_within(2).of(25)
+    end
+
+    it "creates the solution with the first character of 'O' approximately 25% of the time" do
+      percentage = (@results['O'] / 1000.0) * 100
+      expect(percentage).to be_within(2).of(25)
+    end
   end
 
   context "generate solution based upon possibilities input" do
