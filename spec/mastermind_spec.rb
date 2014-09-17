@@ -71,13 +71,17 @@ class Mastermind
       # does guess.x = solution.x ? if yes delete solution.x, loop guess
       #                             if no, loop solution.x+1 > solution.end, does guess.x = solution.i
 
-      # 2. check to see if colors exist
-      if @solution.to_a.include?(guess_char) then
-        result_array[guess_index] = :match_color_not_position
-      end
-      # 3. check to see if colours are in correct positions
+      # 2. check to see if colours are in correct positions
       if guess_char == @solution.to_a[guess_index] then
         result_array[guess_index] = :match_color_and_position
+
+        # change the solution index to a space, so we don't match it again
+        @solution.to_a[guess_index] = ' '
+      else
+        # 3. check to see if colors exist
+        if @solution.to_a.include?(guess_char) then
+          result_array[guess_index] = :match_color_not_position
+        end
       end
     end
 
