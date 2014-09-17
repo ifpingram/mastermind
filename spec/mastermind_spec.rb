@@ -62,7 +62,6 @@ class Mastermind
 
     guess_array.each_with_index do |guess_char,guess_index|
 
-
       # sol: [slot1: R, slot2: R, slot3: B, slot4: Y]
       # guess: 'ORRO' => slot1: O. nope, slot2: R. yes <= mark slot 2 in the guess as 'used' to connect to slot1 in the solution?
       # slot2 sol: 'R', does that match slot2 of the guess? nope. Scan the guess for an 'R'
@@ -120,7 +119,7 @@ describe Mastermind do
   # solution: RGRY
   # Guess: RBYB
   # 1 match with position (1st R)
-  # 1 match without pisition (Y)
+  # 1 match without position (Y)
 
   # solution: RGRY
   # guess: RRBB
@@ -151,14 +150,6 @@ describe Mastermind do
   # guess: OOOR
   # 1 match without position
 
-  # sol: [slot1: R, slot2: R, slot3: B, slot4: Y]
-  # guess: 'ORRO' => slot1: O. nope, slot2: R. yes <= mark slot 2 in the guess as 'used' to connect to slot1 in the solution?
-  # slot2 sol: 'R', does that match slot2 of the guess? nope. Scan the guess for an 'R'
-
-  # loop guess
-  # does guess.x = solution.x ? if yes delete solution.x, loop guess
-  #                             if no, loop solution.x+1 > solution.end, does guess.x = solution.i
-
   context "allow duplicates in the solution" do
     it "returns 4 no matches if the solution is 'RRRR' and the guess is 'BBBB'" do
       expect(Mastermind.new(MastermindSolution.new({:solution_choices => 'RRRR', :solution_length => 4})).attempt('BBBB')).to eq('....')
@@ -170,6 +161,10 @@ describe Mastermind do
 
     it "returns 2 match colour and position if the solution is 'RRBB' and the guess is 'RRRR'" do
       expect(Mastermind.new(MastermindSolution.new({:solution => 'RRBB'})).attempt('RRRR')).to eq('@@..')
+    end
+
+    it "returns 1 match colour and position + 1 match colour not position if the solution is 'RGRY' and the guess is 'RBYB'" do
+      expect(Mastermind.new(MastermindSolution.new({:solution => 'RGRY'})).attempt('RBYB')).to eq('@+..')
     end
   end
 
