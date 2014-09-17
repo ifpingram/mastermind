@@ -61,6 +61,16 @@ class Mastermind
     result_array = Array.new(guess_array.length, :no_match)
 
     guess_array.each_with_index do |guess_char,guess_index|
+
+
+      # sol: [slot1: R, slot2: R, slot3: B, slot4: Y]
+      # guess: 'ORRO' => slot1: O. nope, slot2: R. yes <= mark slot 2 in the guess as 'used' to connect to slot1 in the solution?
+      # slot2 sol: 'R', does that match slot2 of the guess? nope. Scan the guess for an 'R'
+
+      # loop guess
+      # does guess.x = solution.x ? if yes delete solution.x, loop guess
+      #                             if no, loop solution.x+1 > solution.end, does guess.x = solution.i
+
       # 2. check to see if colors exist
       if @solution.to_a.include?(guess_char) then
         result_array[guess_index] = :match_color_not_position
@@ -152,6 +162,10 @@ describe Mastermind do
 
     it "returns 4 match colour and position if the solution is 'RRRR' and the guess is 'RRRR'" do
       expect(Mastermind.new(MastermindSolution.new({:solution_choices => 'RRRR', :solution_length => 4})).attempt('RRRR')).to eq('@@@@')
+    end
+
+    it "returns 2 match colour and position if the solution is 'RRBB' and the guess is 'RRRR'" do
+      expect(Mastermind.new(MastermindSolution.new({:solution => 'RRBB'})).attempt('RRRR')).to eq('@@..')
     end
   end
 
