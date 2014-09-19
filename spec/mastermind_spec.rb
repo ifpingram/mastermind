@@ -55,21 +55,12 @@ class Mastermind
 
   def check guess
     guess_array = guess.split(//)
-    # raise Mastermind::DuplicateNotAllowedException if guess_array.length - guess_array.uniq.length != 0
 
     # 1. set array to no match
+    result_array = set_array_to_no_match(guess_array.length)
     result_array = Array.new(guess_array.length, :no_match)
 
     guess_array.each_with_index do |guess_char,guess_index|
-
-      # sol: [slot1: R, slot2: R, slot3: B, slot4: Y]
-      # guess: 'ORRO' => slot1: O. nope, slot2: R. yes <= mark slot 2 in the guess as 'used' to connect to slot1 in the solution?
-      # slot2 sol: 'R', does that match slot2 of the guess? nope. Scan the guess for an 'R'
-
-      # loop guess
-      # does guess.x = solution.x ? if yes delete solution.x, loop guess
-      #                             if no, loop solution.x+1 > solution.end, does guess.x = solution.i
-
       # 2. check to see if colours are in correct positions
       if guess_char == @solution.to_a[guess_index] then
         result_array[guess_index] = :match_color_and_position
@@ -81,6 +72,8 @@ class Mastermind
         if @solution.to_a.include?(guess_char) then
           result_array[guess_index] = :match_color_not_position
           solution_index_to_remove = @solution.to_a.index(guess_char)
+
+          # change the solution index of the first character to match, to a space, so we don't match it again
           @solution.to_a[solution_index_to_remove] = ' '
         end
       end
@@ -134,7 +127,6 @@ describe Mastermind do
      ['RGBY','ACDE','....'],
     ].each do |solution_attempt_output|
       it "outputs '#{solution_attempt_output[2]}' when the solution is '#{solution_attempt_output[0]}' and the guess is '#{solution_attempt_output[1]}'" do
-        puts solution_attempt_output.inspect
         expect(Mastermind.new(MastermindSolution.new({:solution => solution_attempt_output[0]})).attempt(solution_attempt_output[1])).to eq(solution_attempt_output[2])
       end
     end
