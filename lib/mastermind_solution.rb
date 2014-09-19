@@ -4,7 +4,7 @@ class MastermindSolution
 
   def initialize params
     if params[:solution]
-      @solution = params[:solution]
+      @solution = String.new(params[:solution]).split(//)
     else
       randomized_array = params[:solution_choices].split(//).shuffle
       @solution = randomized_array.slice(0,params[:solution_length])
