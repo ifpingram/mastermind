@@ -120,15 +120,18 @@ describe Mastermind do
 
   context "allow duplicates in the solution" do
     [
-     #['RRRR','RRRR','@@@@'],
-     #['RRBB','RRRR','@@..'],
-     #['RGRY','RBYB','@+..'],
-     #['RGRY','RRBB','@+..'],
-     #['RGBY','RRBB','@@..'],
-     #['RRRR','BBBB','....'],
-     ['RGBY','ORRO','+...'],
-     #['RRBY','OORR','++..'],
-     #['RRBY','OOOR','+...'],
+     ['RRRR','RRRR','@@@@'],
+     ['RRRB','RRRY','@@@.'],
+     ['BRRR','YRRR','@@@.'],
+     ['BRYR','YRYR','@@+.'],
+     ['RGRY','RGBB','@@..'],
+     ['RGRY','RBBB','@...'],
+     ['RRBO','RRYB','@@+.'],
+     ['RGBY','RBYO','@++.'],
+     ['RGBY','YRGB','++++'],
+     ['RGBY','YRGO','+++.'],
+     ['RGBY','GROA','++..'],
+     ['RGBY','ACDE','....'],
     ].each do |solution_attempt_output|
       it "outputs '#{solution_attempt_output[2]}' when the solution is '#{solution_attempt_output[0]}' and the guess is '#{solution_attempt_output[1]}'" do
         puts solution_attempt_output.inspect
