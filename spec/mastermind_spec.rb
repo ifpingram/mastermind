@@ -155,31 +155,13 @@ describe Mastermind do
       expect(Mastermind.new(MastermindSolution.new({:solution => 'RRRR'})).attempt('BBBB')).to eq('....')
     end
 
-    # Unable to refactor into hash, as the solution is modified in the check method, and we are unable to modify hash keys
-
-    {'RRRR'=>['RRRR','@@@@'],
-     'RRBB'=>['RRRR','@@..'],
-     'RGRY'=>['RBYB','@+..']
-    }.each do |solution,attempt|
-      it "outputs '#{attempt[1]}' when the solution is '#{solution}' and the guess is '#{attempt[0]}'" do
-        puts solution
-        puts attempt[0]
-        puts attempt[1]
-        expect(Mastermind.new(MastermindSolution.new({:solution => solution})).attempt(attempt[0])).to eq(attempt[1])
+    [['RRRR','RRRR','@@@@'],
+     ['RRBB','RRRR','@@..'],
+     ['RGRY','RBYB','@+..']].each do |solution_attempt_output|
+      it "outputs '#{solution_attempt_output[2]}' when the solution is '#{solution_attempt_output[0]}' and the guess is '#{solution_attempt_output[1]}'" do
+        expect(Mastermind.new(MastermindSolution.new({:solution => solution_attempt_output[0]})).attempt(solution_attempt_output[1])).to eq(solution_attempt_output[2])
       end
     end
-    #
-    # it "returns 4 match colour and position if the solution is 'RRRR' and the guess is 'RRRR'" do
-    #   expect(Mastermind.new(MastermindSolution.new({:solution => 'RRRR'})).attempt('RRRR')).to eq('@@@@')
-    # end
-    #
-    # it "returns 2 match colour and position if the solution is 'RRBB' and the guess is 'RRRR'" do
-    #   expect(Mastermind.new(MastermindSolution.new({:solution => 'RRBB'})).attempt('RRRR')).to eq('@@..')
-    # end
-    #
-    # it "returns 1 match colour and position + 1 match colour not position if the solution is 'RGRY' and the guess is 'RBYB'" do
-    #   expect(Mastermind.new(MastermindSolution.new({:solution => 'RGRY'})).attempt('RBYB')).to eq('@+..')
-    # end
   end
 
 
