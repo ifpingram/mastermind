@@ -11,6 +11,23 @@ class MastermindSolution
     end
   end
 
+  def check_if_color_matches_position guess_char, guess_index
+    @solution[guess_index] == guess_char
+  end
+
+  def check_if_color_exists guess_char
+    @solution.include?(guess_char)
+  end
+
+  def mark_index_as_matched index_value
+    @solution[index_value] = ' '
+  end
+
+  def mark_first_index_as_matched guess_char
+    solution_index_to_remove = @solution.to_a.index(guess_char)
+    @solution[solution_index_to_remove] = ' '
+  end
+
   def to_a
     solution
   end

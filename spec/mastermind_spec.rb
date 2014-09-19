@@ -56,30 +56,27 @@ class Mastermind
   def check guess
     guess_array = guess.split(//)
 
-    # 1. set array to no match
-    result_array = set_array_to_no_match(guess_array.length)
-    result_array = Array.new(guess_array.length, :no_match)
+    result_array = initialize_array_of_no_matches(guess_array.length)
 
     guess_array.each_with_index do |guess_char,guess_index|
-      # 2. check to see if colours are in correct positions
-      if guess_char == @solution.to_a[guess_index] then
+
+      if @solution.check_if_color_matches_position(guess_char,guess_index)
         result_array[guess_index] = :match_color_and_position
+        @solution.mark_index_as_matched(guess_index)
 
-        # change the solution index to a space, so we don't match it again
-        @solution.to_a[guess_index] = ' '
-      else
-        # 3. check to see if colors exist
-        if @solution.to_a.include?(guess_char) then
-          result_array[guess_index] = :match_color_not_position
-          solution_index_to_remove = @solution.to_a.index(guess_char)
+      elsif @solution.check_if_color_exists(guess_char)
+        result_array[guess_index] = :match_color_not_position
+        @solution.mark_first_index_as_matched(guess_char)
 
-          # change the solution index of the first character to match, to a space, so we don't match it again
-          @solution.to_a[solution_index_to_remove] = ' '
-        end
       end
     end
 
     result_array
+  end
+
+  # private
+  def initialize_array_of_no_matches guess_length
+    Array.new(guess_length, :no_match)
   end
 
   def count_matches matches
