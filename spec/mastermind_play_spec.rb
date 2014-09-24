@@ -65,7 +65,7 @@ describe MastermindPlay do
   # "B -> Blue"
   # "Y -> Yellow"
   # "O -> Orange"
-  # "Please enter your character guess:"
+  # "Please enter your 4 character guess:"
   # "____" -> STDIN
 
 
@@ -73,6 +73,12 @@ describe MastermindPlay do
     output = double('output_double')
     expect(output).to receive(:puts).with('Welcome to Mastermind!')
     expect(output).to receive(:puts).with('I have created a 4 character solution for you to guess, using the following colors:')
+    expect(output).to receive(:puts).with('R -> Red')
+    expect(output).to receive(:puts).with('G -> Green')
+    expect(output).to receive(:puts).with('B -> Blue')
+    expect(output).to receive(:puts).with('Y -> Yellow')
+    expect(output).to receive(:puts).with('O -> Orange')
+    expect(output).to receive(:puts).with('Please enter your 4 character guess:')
     MastermindPlay.new(output)
   end
 end
