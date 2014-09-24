@@ -79,16 +79,16 @@ describe MastermindPlay do
     expect(output).to receive(:puts).with('Y -> Yellow')
     expect(output).to receive(:puts).with('O -> Orange')
     expect(output).to receive(:puts).with('Please enter your 4 character guess:')
-    MastermindPlay.new(output)
-    # game = MastermindPlay.new(output)
+    # MastermindPlay.new(output)
+    game = MastermindPlay.new(output)
     # game.set_colors(...)
     # game.set_solution_size(6)
-    # game.play
+    game.play
   end
 
   it "asks for a guess input of 4 characters" do
     expect_any_instance_of(MastermindPlay).to receive(:make_guess)
-    MastermindPlay.new
+    MastermindPlay.new.play
     # expect(MastermindPlay.new).to receive(:make_guess)
     # do something that will cause :make_guess to be called
   end

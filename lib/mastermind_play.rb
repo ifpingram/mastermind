@@ -1,5 +1,12 @@
 class MastermindPlay
+
+  attr_reader :output_stream
+
   def initialize(output_stream = STDOUT)
+    @output_stream = output_stream
+  end
+
+  def play
     output_stream.puts "Welcome to Mastermind!"
     output_stream.puts 'I have created a 4 character solution for you to guess, using the following colors:'
     output_stream.puts 'R -> Red'
