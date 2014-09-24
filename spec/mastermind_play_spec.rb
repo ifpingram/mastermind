@@ -59,10 +59,20 @@ require 'mastermind_play'
 describe MastermindPlay do
   # > ruby mastermind_play
   # "Welcome to Mastermind!"
+  # "I have created a 4 character solution for you to guess, using the following colors:"
+  # "R -> Red"
+  # "G -> Green"
+  # "B -> Blue"
+  # "Y -> Yellow"
+  # "O -> Orange"
+  # "Please enter your character guess:"
+  # "____" -> STDIN
+
 
   it "welcomes us to the game" do
     output = double('output_double')
-    expect(output).to receive(:puts).with("Welcome to Mastermind!")
+    expect(output).to receive(:puts).with('Welcome to Mastermind!')
+    expect(output).to receive(:puts).with('I have created a 4 character solution for you to guess, using the following colors:')
     MastermindPlay.new(output)
   end
 end
