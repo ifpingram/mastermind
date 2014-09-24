@@ -1,6 +1,7 @@
 class MastermindPlay
   def initialize(output_stream = STDOUT)
     output_stream.puts "Welcome to Mastermind!"
+    output_stream.puts 'I have created a 4 character solution for you to guess, using the following colors:'
   end
 end
 
