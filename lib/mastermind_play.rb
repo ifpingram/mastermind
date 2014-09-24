@@ -8,6 +8,15 @@ class MastermindPlay
     output_stream.puts 'Y -> Yellow'
     output_stream.puts 'O -> Orange'
     output_stream.puts 'Please enter your 4 character guess:'
+    make_guess  #=?>  self.make_guess
+    # other_object.make_guess => I'm sending 'make_guess' to other_object
+    # self.make_guess => I'm sending 'make_guess' to myself
+    # make_guess => the same
+    # I expect that self will receive 'make_guess'
+  end
+
+  def make_guess
+  #   guess = gets
   end
 end
 
