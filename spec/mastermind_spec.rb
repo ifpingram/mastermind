@@ -47,6 +47,18 @@ describe Mastermind do
   # attempt solution
   # output result
 
+
+  # puts "Hello! Welcome to Mastermind!"
+  # puts "Would you like to play a new game? (Y/N) "
+  # gets answer
+  # check_answer(answer)
+  # if answer == 'Y' then
+  # Mastermind.new...
+  # else
+  # puts "Sorry to hear that. Maybe next time!"
+
+
+
   context "allow duplicates in the solution" do
     [
      ['RRRR','RRRR','@@@@'],
