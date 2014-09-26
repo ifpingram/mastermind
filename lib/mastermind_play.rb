@@ -13,6 +13,7 @@ class MastermindPlay
     writer.welcome
     writer.prompt_for_guess
     guess = reader.receive_guess
+    mastermind.attempt(guess)
     # if mastermind.check(guess)
     # guess = reader.make_guess
     # if guess.correct?
