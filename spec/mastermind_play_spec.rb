@@ -60,8 +60,16 @@ describe MastermindPlay do
 
   context 'play' do
     it "welcomes us to a new game" do
-      game = MastermindPlay.new # setup
-      expect_any_instance_of(MastermindPlay::Writer).to receive(:welcome) # expectation
+      writer_mock = double('writer_mock')
+      game = MastermindPlay.new(writer_mock) # setup
+      expect(writer_mock).to receive(:welcome) # expectation
+      game.play # execution
+    end
+
+    it "prompts for our first guess" do
+      writer_mock = double('writer_mock').as_null_object
+      game = MastermindPlay.new(writer_mock) # setup
+      expect(writer_mock).to receive(:prompt_for_guess) # expectation
       game.play # execution
     end
   end
