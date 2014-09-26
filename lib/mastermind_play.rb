@@ -15,6 +15,7 @@ class MastermindPlay
     guess = reader.receive_guess
     mastermind.attempt(guess)
     writer.guess_was_correct
+    writer.guess_was_incorrect
 
     # if mastermind.check(guess)
     # guess = reader.make_guess
