@@ -9,7 +9,7 @@ class MastermindPlay
   end
 
   def play
-    # mastermind = Mastermind.new
+    mastermind = Mastermind.new
     writer.welcome
     writer.prompt_for_guess
     guess = reader.receive_guess

@@ -55,7 +55,7 @@
 # puts "Sorry to hear that. Maybe next time!"
 
 require 'mastermind_play'
-#require 'mastermind'
+require 'mastermind'
 
 describe MastermindPlay do
 
