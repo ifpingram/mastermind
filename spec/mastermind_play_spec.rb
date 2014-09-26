@@ -97,7 +97,9 @@ describe MastermindPlay do
     context "making a valid guess" do
 
       it "tells us our guess was correct" do
+        allow(mastermind).to receive(:attempt).and_return('@@@@')
         expect(writer_mock).to receive(:guess_was_correct)
+        expect(writer_mock).to_not receive(:guess_was_incorrect)
         game.play
       end
     end
@@ -105,7 +107,11 @@ describe MastermindPlay do
     context "making a invalid guess" do
 
       it "tells us our guess was incorrect" do
+        #expect(writer_mock).to receive(:guess_was_incorrect)
+
+        allow(mastermind).to receive(:attempt).and_return('....')
         expect(writer_mock).to receive(:guess_was_incorrect)
+        expect(writer_mock).to_not receive(:guess_was_correct)
         game.play
       end
     end

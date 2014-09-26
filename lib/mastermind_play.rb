@@ -13,9 +13,12 @@ class MastermindPlay
     writer.welcome
     writer.prompt_for_guess
     guess = reader.receive_guess
-    mastermind.attempt(guess)
-    writer.guess_was_correct
-    writer.guess_was_incorrect
+    mastermind.attempt(guess) #'....', { 'correct' => true/fals, 'display' => '@@@@' }
+    if mastermind.attempt(guess) == '@@@@'
+      writer.guess_was_correct
+    else
+      writer.guess_was_incorrect
+    end
 
     # if mastermind.check(guess)
     # guess = reader.make_guess
