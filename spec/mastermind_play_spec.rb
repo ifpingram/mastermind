@@ -61,7 +61,7 @@ describe MastermindPlay do
   context 'play with a valid guess' do
     let(:writer_mock) { double('writer_mock').as_null_object }
     let(:reader_mock) { double('reader_mock').as_null_object }
-    let(:game) { MastermindPlay.new(writer_mock) }
+    let(:game) { MastermindPlay.new(writer_mock, reader_mock) }
 
     it "welcomes us to a new game" do
       expect(writer_mock).to receive(:welcome)
@@ -75,6 +75,7 @@ describe MastermindPlay do
 
     it "receives a user guess" do
       expect(reader_mock).to receive(:receive_guess)
+      game.play
     end
   end
   # > ruby mastermind_play

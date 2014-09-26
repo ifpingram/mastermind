@@ -1,15 +1,17 @@
 class MastermindPlay
 
-  attr_reader :writer
+  attr_reader :writer, :reader
 
   # http://blog.8thlight.com/josh-cheek/2011/10/01/testing-code-thats-hard-to-test.html
   def initialize(writer = Writer.new, reader = Reader.new)
     @writer = writer
+    @reader = reader
   end
 
   def play
     writer.welcome
     writer.prompt_for_guess
+    reader.receive_guess
     # guess = reader.make_guess
     # if guess.correct?
     #   writer.declare_suces
