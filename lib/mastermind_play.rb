@@ -9,9 +9,11 @@ class MastermindPlay
   end
 
   def play
+    # mastermind = Mastermind.new
     writer.welcome
     writer.prompt_for_guess
-    reader.receive_guess
+    guess = reader.receive_guess
+    # if mastermind.check(guess)
     # guess = reader.make_guess
     # if guess.correct?
     #   writer.declare_suces

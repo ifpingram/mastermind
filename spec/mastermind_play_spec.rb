@@ -55,6 +55,7 @@
 # puts "Sorry to hear that. Maybe next time!"
 
 require 'mastermind_play'
+#require 'mastermind'
 
 describe MastermindPlay do
 
@@ -63,6 +64,11 @@ describe MastermindPlay do
     let(:reader_mock) { double('reader_mock').as_null_object }
     let(:game) { MastermindPlay.new(writer_mock, reader_mock) }
 
+    it "creates a new Mastermind object" do
+      expect(Mastermind).to receive(:new)
+      game.play
+    end
+
     it "welcomes us to a new game" do
       expect(writer_mock).to receive(:welcome)
       game.play
@@ -70,6 +76,11 @@ describe MastermindPlay do
 
     it "prompts for our first guess" do
       expect(writer_mock).to receive(:prompt_for_guess)
+      game.play
+    end
+
+    it "receives a user guess" do
+      expect(reader_mock).to receive(:receive_guess)
       game.play
     end
 
