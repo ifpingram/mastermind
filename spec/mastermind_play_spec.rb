@@ -93,6 +93,10 @@ describe MastermindPlay do
       expect(mastermind).to receive(:attempt) #.with('RGBY').and_return(true)
       game.play
     end
+
+    it "tells us our guess was correct" do
+      expect(writer_mock).to receive(:guess_was_correct)
+    end
   end
   # > ruby mastermind_play
   # "Welcome to Mastermind!"
