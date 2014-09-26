@@ -60,7 +60,7 @@ describe MastermindPlay do
 
   context 'play' do
     it "welcomes us to a new game" do
-      writer_mock = double('writer_mock')
+      writer_mock = double('writer_mock').as_null_object
       game = MastermindPlay.new(writer_mock) # setup
       expect(writer_mock).to receive(:welcome) # expectation
       game.play # execution

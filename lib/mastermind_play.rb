@@ -9,7 +9,7 @@ class MastermindPlay
 
   def play
     writer.welcome
-
+    writer.prompt_for_guess
     # guess = reader.make_guess
     # if guess.correct?
     #   writer.declare_suces
