@@ -1,25 +1,50 @@
 class MastermindPlay
 
-  attr_reader :output_stream
+  attr_reader :writer
 
-  def initialize(output_stream = STDOUT)
-    @output_stream = output_stream
+  # http://blog.8thlight.com/josh-cheek/2011/10/01/testing-code-thats-hard-to-test.html
+  def initialize(writer = Writer.new, reader = Reader.new)
+    @writer = writer
   end
 
   def play
-    output_stream.puts "Welcome to Mastermind!"
-    output_stream.puts 'I have created a 4 character solution for you to guess, using the following colors:'
-    output_stream.puts 'R -> Red'
-    output_stream.puts 'G -> Green'
-    output_stream.puts 'B -> Blue'
-    output_stream.puts 'Y -> Yellow'
-    output_stream.puts 'O -> Orange'
-    output_stream.puts 'Please enter your 4 character guess:'
-    make_guess  #=?>  self.make_guess
+    writer.welcome
+    # guess = reader.make_guess
+    # if guess.correct?
+    #   writer.declare_suces
+    # else
+    #     writer.declare_failure
+    #     writer.offer_to_try_again
+    #     guess = reader.make_guess
+    # end
+
+    # make_guess  #=?>  self.make_guess
     # other_object.make_guess => I'm sending 'make_guess' to other_object
     # self.make_guess => I'm sending 'make_guess' to myself
     # make_guess => the same
     # I expect that self will receive 'make_guess'
+  end
+
+  class Writer
+    attr_reader :output_stream
+    def initialize(output_stream=$stdout)
+      @output_stream = output_stream
+    end
+
+    def welcome
+      output_stream.puts "Welcome to Mastermind!"
+      output_stream.puts 'I have created a 4 character solution for you to guess, using the following colors:'
+      output_stream.puts 'R -> Red'
+      output_stream.puts 'G -> Green'
+      output_stream.puts 'B -> Blue'
+      output_stream.puts 'Y -> Yellow'
+      output_stream.puts 'O -> Orange'
+      output_stream.puts 'Please enter your 4 character guess:'
+    end
+  end
+
+  class Reader
+
   end
 
   def make_guess
