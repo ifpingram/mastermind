@@ -63,10 +63,10 @@ describe MastermindPlay do
     let(:writer_mock) { double('writer_mock').as_null_object }
     let(:reader_mock) { double('reader_mock').as_null_object }
     let(:game) { MastermindPlay.new(writer_mock, reader_mock) }
+    let(:mastermind) { double('mastermind_mock').as_null_object }
 
     before do
-      @mastermind_instance = double('mastermind double').as_null_object
-      allow(Mastermind).to receive(:new).and_return(@mastermind_instance)
+      allow(Mastermind).to receive(:new).and_return(mastermind)
     end
 
     it "creates a new Mastermind object" do
@@ -90,7 +90,7 @@ describe MastermindPlay do
     end
 
     it "attempts the guess against the Mastermind instance's solution" do
-      expect(@mastermind_instance).to receive(:attempt) #.with('RGBY').and_return(true)
+      expect(mastermind).to receive(:attempt) #.with('RGBY').and_return(true)
       game.play
     end
   end
