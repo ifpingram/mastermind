@@ -14,6 +14,8 @@ class MastermindPlay
     writer.prompt_for_guess
     guess = reader.receive_guess
     mastermind.attempt(guess)
+    writer.guess_was_correct
+
     # if mastermind.check(guess)
     # guess = reader.make_guess
     # if guess.correct?
