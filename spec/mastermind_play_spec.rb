@@ -57,6 +57,14 @@
 require 'mastermind_play'
 
 describe MastermindPlay do
+
+  context 'play' do
+    it "welcomes us to a new game" do
+      game = MastermindPlay.new # setup
+      expect_any_instance_of(MastermindPlay::Writer).to receive(:welcome) # expectation
+      game.play # execution
+    end
+  end
   # > ruby mastermind_play
   # "Welcome to Mastermind!"
   # "I have created a 4 character solution for you to guess, using the following colors:"
@@ -68,38 +76,33 @@ describe MastermindPlay do
   # "Please enter your 4 character guess:"
   # "____" -> STDIN
 
+  # do something
+  # I introspect on a result
+  # or I set up an expectation before doing something
 
-  it "welcomes us to the game" do
-    output = double('output_double')
-    expect(output).to receive(:puts).with('Welcome to Mastermind!')
-    expect(output).to receive(:puts).with('I have created a 4 character solution for you to guess, using the following colors:')
-    expect(output).to receive(:puts).with('R -> Red')
-    expect(output).to receive(:puts).with('G -> Green')
-    expect(output).to receive(:puts).with('B -> Blue')
-    expect(output).to receive(:puts).with('Y -> Yellow')
-    expect(output).to receive(:puts).with('O -> Orange')
-    expect(output).to receive(:puts).with('Please enter your 4 character guess:')
-    # MastermindPlay.new(output)
-    game = MastermindPlay.new(output)
-    # game.set_colors(...)
-    # game.set_solution_size(6)
-    game.play
-  end
+  # it "welcomes us to the game" do
+  #   # output = double('output_double')
+  #   # expect(output).to receive(:puts).with('Welcome to Mastermind!')
+  #   # expect(output).to receive(:puts).with('I have created a 4 character solution for you to guess, using the following colors:')
+  #   # expect(output).to receive(:puts).with('R -> Red')
+  #   # expect(output).to receive(:puts).with('G -> Green')
+  #   # expect(output).to receive(:puts).with('B -> Blue')
+  #   # expect(output).to receive(:puts).with('Y -> Yellow')
+  #   # expect(output).to receive(:puts).with('O -> Orange')
+  #   # expect(output).to receive(:puts).with('Please enter your 4 character guess:')
+  #   # output = double('output_double')
+  #   game = MastermindPlay.new # setup
+  #   expect_any_instance_of(MastermindPlay::Writer).to receive(:welcome) # expectation
+  #   game.play # execution
+  # end
+  #
+  # it "asks for a guess input of 4 characters" do
+  #   game = MastermindPlay.new
+  #   expect(game).to receive(:make_guess)
+  #   game.play
+  # end
 
-  it "asks for a guess input of 4 characters" do
-    expect_any_instance_of(MastermindPlay).to receive(:make_guess)
-    MastermindPlay.new.play
-    # expect(MastermindPlay.new).to receive(:make_guess)
-    # do something that will cause :make_guess to be called
-  end
+  # make_guess:
+  # receive input from stdin
+  # possibly clean
 end
-#
-# class Foo
-#   def run
-#     Bar.new.run
-#   end
-#
-# end
-# bar = Bar.new
-# expect(bar).to receive(:run)
-# Foo.new.run
