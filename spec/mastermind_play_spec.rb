@@ -84,8 +84,8 @@ describe MastermindPlay do
       game.play
     end
 
-    it "receives a user guess" do
-      expect(reader_mock).to receive(:receive_guess)
+    it "attempts the guess against the Mastermind instance's solution" do
+      expect_any_instance_of(Mastermind).to receive(:attempt)
       game.play
     end
   end
