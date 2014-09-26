@@ -58,18 +58,23 @@ require 'mastermind_play'
 
 describe MastermindPlay do
 
-  context 'play' do
+  context 'play with a valid guess' do
     let(:writer_mock) { double('writer_mock').as_null_object }
+    let(:reader_mock) { double('reader_mock').as_null_object }
     let(:game) { MastermindPlay.new(writer_mock) }
 
     it "welcomes us to a new game" do
-      expect(writer_mock).to receive(:welcome) # expectation
-      game.play # execution
+      expect(writer_mock).to receive(:welcome)
+      game.play
     end
 
     it "prompts for our first guess" do
-      expect(writer_mock).to receive(:prompt_for_guess) # expectation
-      game.play # execution
+      expect(writer_mock).to receive(:prompt_for_guess)
+      game.play
+    end
+
+    it "receives a user guess" do
+      expect(reader_mock).to receive(:receive_guess)
     end
   end
   # > ruby mastermind_play
