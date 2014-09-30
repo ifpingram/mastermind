@@ -16,7 +16,7 @@ class MastermindPlay
       writer.guess_was_correct
       return true
     else
-      writer.guess_was_incorrect(mastermind.show_guess_result)
+      writer.guess_was_incorrect(mastermind.show_guess_result) # show_guess_result => '....', '+@.+'
       return false
     end
   end

@@ -9,8 +9,13 @@ class Mastermind
     @solution = solution
   end
 
-  def attempt guess
-    format_counted_matches(count_matches(check(guess)))
+  def is_guess_correct? guess
+    @latest_guess = format_counted_matches(count_matches(check(guess)))
+    return @latest_guess == '@@@@'
+  end
+
+  def show_guess_result
+    @latest_guess
   end
 
   # private
