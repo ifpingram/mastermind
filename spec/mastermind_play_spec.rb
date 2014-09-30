@@ -57,6 +57,30 @@
 require 'mastermind_play'
 require 'mastermind'
 
+describe MastermindPlay::Writer do
+  it "should output the welcome text when it receives the welcome message" do
+    stream = StringIO.new
+    MastermindPlay::Writer.new(stream).welcome
+    stream.rewind
+    expect(stream.read).to eq("Welcome to Mastermind!\nI have created a 4 character solution for you to guess, using the following colors:\nR -> Red\nG -> Green\nB -> Blue\nY -> Yellow\nO -> Orange\n")
+  end
+
+  it "should output the enter your guess prompt" do
+    stream = StringIO.new
+    MastermindPlay::Writer.new(stream).prompt_for_guess
+    stream.rewind
+    expect(stream.read).to eq("Please enter your 4 character guess:\n")
+  end
+
+  it "should output that your guess was correct" do
+    stream = StringIO.new
+    MastermindPlay::Writer.new(stream).guess_was_correct
+    stream.rewind
+    expect(stream.read).to eq("Congratulations! You guess correctly\n")
+  end
+end
+
+
 describe MastermindPlay do
 
   context 'playing a game' do

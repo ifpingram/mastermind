@@ -33,6 +33,8 @@ class MastermindPlay
     writer.goodbye
   end
 
+
+
   class Writer
     attr_reader :output_stream
     def initialize(output_stream=$stdout)
@@ -47,6 +49,9 @@ class MastermindPlay
       output_stream.puts 'B -> Blue'
       output_stream.puts 'Y -> Yellow'
       output_stream.puts 'O -> Orange'
+    end
+
+    def prompt_for_guess
       output_stream.puts 'Please enter your 4 character guess:'
     end
   end
