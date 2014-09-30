@@ -8,17 +8,20 @@ class MastermindPlay
     @reader = reader
   end
 
+  def guess
+    writer.prompt_for_guess
+    guess = reader.receive_guess
+    if mastermind.is_guess_correct?(guess)
+      writer.guess_was_correct
+    else
+      writer.guess_was_incorrect(mastermind.show_guess_result)
+    end
+  end
+
   def play
     mastermind = Mastermind.new
     writer.welcome
-    writer.prompt_for_guess
-    guess = reader.receive_guess
-    mastermind.attempt(guess) #'....', { 'correct' => true/fals, 'display' => '@@@@' }
-    if mastermind.attempt(guess) == '@@@@'
-      writer.guess_was_correct
-    else
-      writer.guess_was_incorrect
-    end
+    guess
 
     # if mastermind.check(guess)
     # guess = reader.make_guess

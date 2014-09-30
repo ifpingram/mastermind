@@ -90,14 +90,14 @@ describe MastermindPlay do
     end
 
     it "attempts the guess against the Mastermind instance's solution" do
-      expect(mastermind).to receive(:attempt) #.with('RGBY').and_return(true)
+      expect(mastermind).to receive(:is_guess_correct?) #.with('RGBY').and_return(true)
       game.play
     end
 
     context "making a valid guess" do
 
       it "tells us our guess was correct" do
-        allow(mastermind).to receive(:attempt).and_return('@@@@')
+        allow(mastermind).to receive(:is_guess_correct?).and_return(true)
         expect(writer_mock).to receive(:guess_was_correct)
         expect(writer_mock).to_not receive(:guess_was_incorrect)
         game.play
@@ -106,11 +106,12 @@ describe MastermindPlay do
 
     context "making a invalid guess" do
 
-      it "tells us our guess was incorrect" do
-        #expect(writer_mock).to receive(:guess_was_incorrect)
+      let(:guess_result) { 'foo' }
 
-        allow(mastermind).to receive(:attempt).and_return('....')
-        expect(writer_mock).to receive(:guess_was_incorrect)
+      it "tells us our guess was incorrect" do
+        allow(mastermind).to receive(:is_guess_correct?).and_return(false)
+        allow(mastermind).to receive(:show_guess_result).and_return(guess_result)
+        expect(writer_mock).to receive(:guess_was_incorrect).with(guess_result)
         expect(writer_mock).to_not receive(:guess_was_correct)
         game.play
       end
