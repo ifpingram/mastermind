@@ -125,6 +125,11 @@ describe MastermindPlay do
         expect(game).to receive(:make_guess).exactly(3).times.and_return(false, false, true)
         game.play
       end
+
+      it "tells asks us to guess again and again and again and again and again and again and again" do
+        expect(game).to receive(:make_guess).exactly(7).times.and_return(false, false, false, false, false, false, true)
+        game.play
+      end
     end
   end
   # > ruby mastermind_play
