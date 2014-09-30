@@ -115,6 +115,16 @@ describe MastermindPlay do
         expect(writer_mock).to_not receive(:guess_was_correct)
         game.play
       end
+
+      it "tells asks us to guess again" do
+        expect(game).to receive(:make_guess).exactly(2).times.and_return(false, true)
+        game.play
+      end
+
+      it "tells asks us to guess again and again and again" do
+        expect(game).to receive(:make_guess).exactly(3).times.and_return(false, false, true)
+        game.play
+      end
     end
   end
   # > ruby mastermind_play

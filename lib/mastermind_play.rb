@@ -1,27 +1,34 @@
 class MastermindPlay
 
-  attr_reader :writer, :reader
+  attr_reader :writer, :reader, :mastermind
 
   # http://blog.8thlight.com/josh-cheek/2011/10/01/testing-code-thats-hard-to-test.html
   def initialize(writer = Writer.new, reader = Reader.new)
     @writer = writer
     @reader = reader
+    @mastermind = Mastermind.new
   end
 
-  def guess
+  def make_guess
     writer.prompt_for_guess
     guess = reader.receive_guess
     if mastermind.is_guess_correct?(guess)
       writer.guess_was_correct
+      # return true
+      # end the game
     else
       writer.guess_was_incorrect(mastermind.show_guess_result)
+      # return false
     end
   end
 
   def play
-    mastermind = Mastermind.new
     writer.welcome
-    guess
+    if !make_guess
+      if !make_guess
+        make_guess
+      end
+    end
 
     # if mastermind.check(guess)
     # guess = reader.make_guess
@@ -60,10 +67,6 @@ class MastermindPlay
 
   class Reader
 
-  end
-
-  def make_guess
-  #   guess = gets
   end
 end
 
