@@ -76,7 +76,7 @@ describe MastermindPlay::Writer do
     stream = StringIO.new
     MastermindPlay::Writer.new(stream).guess_was_correct
     stream.rewind
-    expect(stream.read).to eq("Congratulations! You guess correctly\n")
+    expect(stream.read).to eq("Congratulations! You guessed correctly!\n")
   end
 end
 

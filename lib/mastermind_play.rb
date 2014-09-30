@@ -54,6 +54,10 @@ class MastermindPlay
     def prompt_for_guess
       output_stream.puts 'Please enter your 4 character guess:'
     end
+
+    def guess_was_correct
+      output_stream.puts 'Congratulations! You guessed correctly!'
+    end
   end
 
   class Reader
