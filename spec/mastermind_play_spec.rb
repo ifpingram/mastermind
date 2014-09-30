@@ -96,6 +96,7 @@ describe MastermindPlay do
 
     it "thanks us for playing" do
       expect(writer_mock).to receive(:goodbye)
+      game.play
     end
 
     context "making a valid guess" do

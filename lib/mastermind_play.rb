@@ -30,22 +30,7 @@ class MastermindPlay
       guess_result = make_guess
     end
 
-
-    # if mastermind.check(guess)
-    # guess = reader.make_guess
-    # if guess.correct?
-    #   writer.declare_suces
-    # else
-    #     writer.declare_failure
-    #     writer.offer_to_try_again
-    #     guess = reader.make_guess
-    # end
-
-    # make_guess  #=?>  self.make_guess
-    # other_object.make_guess => I'm sending 'make_guess' to other_object
-    # self.make_guess => I'm sending 'make_guess' to myself
-    # make_guess => the same
-    # I expect that self will receive 'make_guess'
+    writer.goodbye
   end
 
   class Writer
