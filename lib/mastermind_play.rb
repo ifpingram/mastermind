@@ -14,21 +14,22 @@ class MastermindPlay
     guess = reader.receive_guess
     if mastermind.is_guess_correct?(guess)
       writer.guess_was_correct
-      # return true
-      # end the game
+      return true
     else
       writer.guess_was_incorrect(mastermind.show_guess_result)
-      # return false
+      return false
     end
   end
 
   def play
     writer.welcome
-    if !make_guess
-      if !make_guess
-        make_guess
-      end
+
+    guess_result = false
+
+    until guess_result
+      guess_result = make_guess
     end
+
 
     # if mastermind.check(guess)
     # guess = reader.make_guess

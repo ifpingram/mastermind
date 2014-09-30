@@ -109,10 +109,9 @@ describe MastermindPlay do
       let(:guess_result) { 'foo' }
 
       it "tells us our guess was incorrect" do
-        allow(mastermind).to receive(:is_guess_correct?).and_return(false)
-        allow(mastermind).to receive(:show_guess_result).and_return(guess_result)
-        expect(writer_mock).to receive(:guess_was_incorrect).with(guess_result)
-        expect(writer_mock).to_not receive(:guess_was_correct)
+        allow(mastermind).to receive(:is_guess_correct?).exactly(2).times.and_return(false,true)
+        allow(mastermind).to receive(:show_guess_result).exactly(2).times.and_return(guess_result)
+        expect(writer_mock).to receive(:guess_was_incorrect).exactly(1).times.with(guess_result)
         game.play
       end
 
