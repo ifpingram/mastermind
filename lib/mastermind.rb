@@ -4,6 +4,7 @@ class Mastermind
   class DuplicateNotAllowedException < StandardError; end
   class InvalidInputException < StandardError; end
   class InvalidInputTypeException < StandardError; end
+  class InvalidInputLengthException < StandardError; end
 
   def initialize solution=MastermindSolution.new({:solution_choices => 'R', :solution_length => 1})
     @solution = solution
