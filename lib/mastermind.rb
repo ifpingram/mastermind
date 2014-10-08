@@ -5,6 +5,7 @@ class Mastermind
   class InvalidInputException < StandardError; end
   class InvalidInputTypeException < StandardError; end
   class InvalidInputLengthException < StandardError; end
+  class InvalidInputCharacterException < StandardError; end
 
   def initialize solution=MastermindSolution.new({:solution_choices => 'R', :solution_length => 1})
     @solution = solution
@@ -25,6 +26,7 @@ class Mastermind
     # if not string then exception
     raise Mastermind::InvalidInputTypeException unless guess.is_a? String
     raise Mastermind::InvalidInputLengthException unless guess.length == @solution.solution.length
+
     guess_array = guess.to_s.split(//)
 
     result_array = initialize_array_of_no_matches(guess_array.length)
