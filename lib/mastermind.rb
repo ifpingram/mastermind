@@ -29,6 +29,10 @@ class Mastermind
 
     guess_array = guess.to_s.split(//)
 
+    guess_array.each do |character|
+      raise Mastermind::InvalidInputCharacterException unless @solution.solution_choices.include? character
+    end
+
     result_array = initialize_array_of_no_matches(guess_array.length)
 
     guess_array.each_with_index do |guess_char,guess_index|

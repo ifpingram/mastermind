@@ -3,7 +3,7 @@ require 'mastermind'
 describe Mastermind do
 
   context "allow duplicates in the solution" do
-    [
+    [ # solution, attempt, success?, output
      ['RRRR','RRRR',true,'@@@@'],
      ['RRRB','RRRY',false,'@@@.'],
      ['BRRR','YRRR',false,'@@@.'],

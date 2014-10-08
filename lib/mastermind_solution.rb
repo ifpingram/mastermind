@@ -1,13 +1,14 @@
 class MastermindSolution
 
-  attr_reader :solution
+  attr_reader :solution, :solution_choices
 
   def initialize params
     if params[:solution]
+      @solution_choices = ('A'..'Z').to_a
       @solution = String.new(params[:solution]).split(//)
     else
-      randomized_array = params[:solution_choices].split(//).shuffle
-      @solution = randomized_array.slice(0,params[:solution_length])
+      @solution_choices = params[:solution_choices].split(//)
+      @solution = @solution_choices.shuffle.slice(0,params[:solution_length])
     end
   end
 
