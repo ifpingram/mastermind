@@ -1,8 +1,6 @@
 require 'mastermind_solution'
 
 class Mastermind
-  class DuplicateNotAllowedException < StandardError; end
-  class InvalidInputException < StandardError; end
   class InvalidInputTypeException < StandardError; end
   class InvalidInputLengthException < StandardError; end
   class InvalidInputCharacterException < StandardError; end
@@ -12,6 +10,7 @@ class Mastermind
   end
 
   def is_guess_correct? guess
+    verify_input(guess)
     @latest_guess = format_counted_matches(count_matches(check(guess)))
     return @latest_guess == '@@@@'
   end
@@ -21,12 +20,12 @@ class Mastermind
   end
 
   # private
-
-  def check guess
-    # if not string then exception
+  def verify_input guess
     raise Mastermind::InvalidInputTypeException unless guess.is_a? String
     raise Mastermind::InvalidInputLengthException unless guess.length == @solution.solution.length
+  end
 
+  def check guess
     guess_array = guess.to_s.split(//)
 
     result_array = initialize_array_of_no_matches(guess_array.length)
@@ -54,13 +53,10 @@ class Mastermind
   end
 
   def count_matches matches
-    raise Mastermind::InvalidInputException if matches.empty?
-    raise Mastermind::InvalidInputTypeException unless matches.is_a?(Array)
-
     count_of_matches = {:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 0}
 
     matches.each do |match_type|
-      count_of_matches[match_type] += 1 rescue raise Mastermind::InvalidInputException
+      count_of_matches[match_type] += 1
     end
 
     count_of_matches
