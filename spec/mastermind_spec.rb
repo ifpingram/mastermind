@@ -39,7 +39,7 @@ describe Mastermind do
       expect{mastermind.is_guess_correct?('RRR')}.to raise_error(Mastermind::InvalidInputLengthException)
     end
 
-    xit "raises a InvalidInputCharacterException if an incorrect attempt character is used" do
+    it "raises a InvalidInputCharacterException if an incorrect attempt character is used" do
       expect{mastermind.is_guess_correct?('RBOP')}.to raise_error(Mastermind::InvalidInputCharacterException)
     end
   end
