@@ -21,10 +21,9 @@ class Mastermind
   # private
 
   def check guess
-    guess_string = guess.to_s
-    if guess_string.length == 0 then raise Mastermind::InvalidInputException end
-    guess_array = guess_string.split(//)
-    #guess_array = guess.to_s.split(//)
+    # if not string then exception
+    raise Mastermind::InvalidInputTypeException unless guess.is_a? String
+    guess_array = guess.to_s.split(//)
 
     result_array = initialize_array_of_no_matches(guess_array.length)
 
