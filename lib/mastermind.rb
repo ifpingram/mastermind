@@ -23,6 +23,7 @@ class Mastermind
   def check guess
     # if not string then exception
     raise Mastermind::InvalidInputTypeException unless guess.is_a? String
+    raise Mastermind::InvalidInputLengthException unless guess.length == @solution.solution.length
     guess_array = guess.to_s.split(//)
 
     result_array = initialize_array_of_no_matches(guess_array.length)
