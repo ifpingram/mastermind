@@ -85,6 +85,13 @@ describe MastermindPlay::Writer do
     stream.rewind
     expect(stream.read).to eq("I'm sorry, you did not guess correctly. Here's your result: [....]\n")
   end
+
+  it "should output that your guess was still incorrect" do
+    stream = StringIO.new
+    MastermindPlay::Writer.new(stream).guess_was_incorrect('++..')
+    stream.rewind
+    expect(stream.read).to eq("I'm sorry, you did not guess correctly. Here's your result: [++..]\n")
+  end
 end
 
 
