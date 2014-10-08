@@ -29,13 +29,10 @@ class Mastermind
 
     guess_array = guess.to_s.split(//)
 
-    guess_array.each do |character|
-      raise Mastermind::InvalidInputCharacterException unless @solution.solution_choices.include? character
-    end
-
     result_array = initialize_array_of_no_matches(guess_array.length)
 
     guess_array.each_with_index do |guess_char,guess_index|
+      raise Mastermind::InvalidInputCharacterException unless @solution.solution_choices.include? guess_char
 
       if @solution.check_if_color_matches_position(guess_char,guess_index)
         result_array[guess_index] = :match_color_and_position
