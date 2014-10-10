@@ -97,6 +97,16 @@ describe MastermindPlay::Writer do
   end
 end
 
+describe MastermindPlay::Reader do
+  let(:stream) { StringIO.new }
+  let(:reader) { MastermindPlay::Reader.new(stream) }
+  it "receives " do
+    # setup with stream with input 'abcd'
+    stream = StringIO.new('abcd')
+    reader = MastermindPlay::Reader.new(stream)
+    expect(reader.receives_guess).to eq('abcd')
+  end
+end
 
 describe MastermindPlay do
 

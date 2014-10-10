@@ -68,6 +68,10 @@ class MastermindPlay
 
   class Reader
 
+
+    # def receive_guess
+    #   input_stream.gets
+    # end
   end
 end
 
