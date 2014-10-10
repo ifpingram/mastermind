@@ -31,5 +31,4 @@ class Mastermind::Writer
   def goodbye
     output_stream.puts 'Thank you for playing. Goodbye!'
   end
-  end
 end
