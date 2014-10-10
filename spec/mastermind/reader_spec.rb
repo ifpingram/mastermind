@@ -1,4 +1,5 @@
 require 'mastermind/reader'
+require 'mastermind'
 
 describe Mastermind::Reader do
 
