@@ -58,7 +58,11 @@ class MastermindPlay
     end
 
     def guess_was_incorrect result_output
-      output_stream.puts "I'm sorry, you did not guess correctly. Here's your result: [#{result_output}]\n"
+      output_stream.puts "I'm sorry, you did not guess correctly. Here's your result: [#{result_output}]"
+    end
+
+    def goodbye
+      output_stream.puts 'Thank you for playing. Goodbye!'
     end
   end
 
