@@ -6,7 +6,7 @@ describe MastermindSolution do
     before :all do
       @results = Hash.new(0) # defaults to zero
       1000.times do
-        solution = MastermindSolution.new({:solution_choices => 'RGBO', :solution_length => 1}).to_s
+        solution = MastermindSolution.new({:choices => 'RGBO', :solution_length => 1}).to_s
         @results[solution] += 1
       end
     end
@@ -34,35 +34,35 @@ describe MastermindSolution do
 
   context "generate solution based upon possibilities input" do
     it "creates and object with a solution of 'R' with the inputs 'R' and 1" do
-      expect(MastermindSolution.new({:solution_choices => 'R', :solution_length => 1}).to_s).to eq('R')
+      expect(MastermindSolution.new({:choices => 'R', :solution_length => 1}).to_s).to eq('R')
     end
 
     it "creates and object with a solution of 'G' with the inputs 'G' and 1" do
-      expect(MastermindSolution.new({:solution_choices => 'G', :solution_length => 1}).to_s).to eq('G')
+      expect(MastermindSolution.new({:choices => 'G', :solution_length => 1}).to_s).to eq('G')
     end
 
     it "creates and object with a solution of 'B' with the inputs 'B' and 1" do
-      expect(MastermindSolution.new({:solution_choices => 'B', :solution_length => 1}).to_s).to eq('B')
+      expect(MastermindSolution.new({:choices => 'B', :solution_length => 1}).to_s).to eq('B')
     end
 
     it "creates and object with a solution of 'R' with the inputs 'RG' and 1" do
       allow_any_instance_of(Array).to receive(:shuffle) { ['R','G'] }
-      expect(MastermindSolution.new({:solution_choices => 'RG', :solution_length => 1}).to_s).to eq('R')
+      expect(MastermindSolution.new({:choices => 'RG', :solution_length => 1}).to_s).to eq('R')
     end
 
     it "creates and object with a solution of 'G' with the inputs 'RG' and 1" do
       allow_any_instance_of(Array).to receive(:shuffle) { ['G','R'] }
-      expect(MastermindSolution.new({:solution_choices => 'RG', :solution_length => 1}).to_s).to eq('G')
+      expect(MastermindSolution.new({:choices => 'RG', :solution_length => 1}).to_s).to eq('G')
     end
 
     it "creates and object with a solution of 'BG' with the inputs 'RGB' and 2" do
       allow_any_instance_of(Array).to receive(:shuffle) { ['B','G', 'R'] }
-      expect(MastermindSolution.new({:solution_choices => 'RGB', :solution_length => 2}).to_s).to eq('BG')
+      expect(MastermindSolution.new({:choices => 'RGB', :solution_length => 2}).to_s).to eq('BG')
     end
 
     it "creates and object with a solution of 'GYOB' with the inputs 'GBYRPTO' and 4" do
       allow_any_instance_of(Array).to receive(:shuffle) { ['G','Y', 'O', 'B', 'P', 'T', 'R'] }
-      expect(MastermindSolution.new({:solution_choices => 'GBYRPTO', :solution_length => 4}).to_s).to eq('GYOB')
+      expect(MastermindSolution.new({:choices => 'GBYRPTO', :solution_length => 4}).to_s).to eq('GYOB')
     end
   end
 

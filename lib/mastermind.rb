@@ -5,8 +5,37 @@ class Mastermind
   class InvalidInputLengthException < StandardError; end
   class InvalidInputCharacterException < StandardError; end
 
-  def initialize mastermind_solution=MastermindSolution.new({:solution_choices => 'RBGY', :solution_length => 4})
+  def initialize(writer = Mastermind::Writer.new, reader = Masermind::reader.new, mastermind_solution=MastermindSolution.new({:choices => 'RBGY', :length => 4})
     @mastermind_solution = mastermind_solution
+    @writer = writer
+    @reader = reader
+  end
+
+
+  def play
+    writer.welcome
+
+    guess_result = false
+
+    until guess_result
+      guess_result = make_guess
+    end
+
+    writer.goodbye
+  end
+
+  #private
+
+  def make_guess
+    writer.prompt_for_guess
+    guess = reader.receive_guess
+    if mastermind.is_guess_correct?(guess)
+      writer.guess_was_correct
+      return true
+    else
+      writer.guess_was_incorrect(mastermind.show_guess_result) # show_guess_result => '....', '+@.+'
+      return false
+    end
   end
 
   def is_guess_correct? guess
@@ -27,13 +56,13 @@ class Mastermind
   end
 
   def check guess
-    @mastermind_solution.solution = @mastermind_solution.master_solution.clone
+    @mastermind_solution.solution = @mastermind_solution.original.clone
     guess_array = guess.to_s.split(//)
 
     result_array = initialize_array_of_no_matches(guess_array.length)
 
     guess_array.each_with_index do |guess_char,guess_index|
-      raise Mastermind::InvalidInputCharacterException unless @mastermind_solution.solution_choices.include? guess_char
+      raise Mastermind::InvalidInputCharacterException unless @mastermind_solution.choices.include? guess_char
 
       if @mastermind_solution.check_if_color_matches_position(guess_char,guess_index)
         result_array[guess_index] = :match_color_and_position
@@ -69,4 +98,8 @@ class Mastermind
   def format_counted_matches counted_matches
     counted_matches.map { |key,value| FORMAT_TEMPLATE[key]*value }.join
   end
+end
+
+if __FILE__==$0
+  Mastermind.new.play # this will only run if the script was the main, not load'd or require'd
 end
