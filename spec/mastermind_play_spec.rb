@@ -55,7 +55,6 @@
 # puts "Sorry to hear that. Maybe next time!"
 
 require 'mastermind_play'
-require 'mastermind'
 
 describe MastermindPlay::Writer do
   let(:stream) { StringIO.new }
@@ -98,19 +97,17 @@ describe MastermindPlay::Writer do
 end
 
 describe MastermindPlay::Reader do
-  let(:stream) { StringIO.new }
-  let(:reader) { MastermindPlay::Reader.new(stream) }
-  it "receives " do
-    # setup with stream with input 'abcd'
+
+  it "receives a guess" do
     stream = StringIO.new('abcd')
     reader = MastermindPlay::Reader.new(stream)
-    expect(reader.receives_guess).to eq('abcd')
+    expect(reader.receive_guess).to eq('abcd')
   end
 
-  it "chops newline" do
+  it "chomps the guess" do
     stream = StringIO.new("abcd\n")
     reader = MastermindPlay::Reader.new(stream)
-    expect(reader.receives_guess).to eq('abcd')
+    expect(reader.receive_guess).to eq('abcd')
   end
 end
 

@@ -5,13 +5,14 @@ class Mastermind
   class InvalidInputLengthException < StandardError; end
   class InvalidInputCharacterException < StandardError; end
 
-  def initialize solution=MastermindSolution.new({:solution_choices => 'R', :solution_length => 1})
-    @solution = solution
+  def initialize mastermind_solution=MastermindSolution.new({:solution_choices => 'RBGY', :solution_length => 4})
+    @mastermind_solution = mastermind_solution
   end
 
   def is_guess_correct? guess
     verify_input(guess)
     @latest_guess = format_counted_matches(count_matches(check(guess)))
+    puts "Latest guess = #{@latest_guess}"
     return @latest_guess == '@@@@'
   end
 
@@ -22,24 +23,25 @@ class Mastermind
   # private
   def verify_input guess
     raise Mastermind::InvalidInputTypeException unless guess.is_a? String
-    raise Mastermind::InvalidInputLengthException unless guess.length == @solution.solution.length
+    raise Mastermind::InvalidInputLengthException unless guess.length == @mastermind_solution.solution.length
   end
 
   def check guess
+    @mastermind_solution.solution = @mastermind_solution.master_solution.clone
     guess_array = guess.to_s.split(//)
 
     result_array = initialize_array_of_no_matches(guess_array.length)
 
     guess_array.each_with_index do |guess_char,guess_index|
-      raise Mastermind::InvalidInputCharacterException unless @solution.solution_choices.include? guess_char
+      raise Mastermind::InvalidInputCharacterException unless @mastermind_solution.solution_choices.include? guess_char
 
-      if @solution.check_if_color_matches_position(guess_char,guess_index)
+      if @mastermind_solution.check_if_color_matches_position(guess_char,guess_index)
         result_array[guess_index] = :match_color_and_position
-        @solution.mark_index_as_matched(guess_index)
+        @mastermind_solution.mark_index_as_matched(guess_index)
 
-      elsif @solution.check_if_color_exists(guess_char)
+      elsif @mastermind_solution.check_if_color_exists(guess_char)
         result_array[guess_index] = :match_color_not_position
-        @solution.mark_first_index_as_matched(guess_char)
+        @mastermind_solution.mark_first_index_as_matched(guess_char)
 
       end
     end

@@ -1,3 +1,5 @@
+require 'mastermind'
+
 class MastermindPlay
 
   attr_reader :writer, :reader, :mastermind
@@ -72,7 +74,7 @@ class MastermindPlay
       @input_stream = input_stream
     end
 
-    def receives_guess
+    def receive_guess
       input_stream.gets.chomp
     end
   end
@@ -80,5 +82,5 @@ end
 
 
 if __FILE__==$0
-  MastermindPlay.new # this will only run if the script was the main, not load'd or require'd
+  MastermindPlay.new.play # this will only run if the script was the main, not load'd or require'd
 end
