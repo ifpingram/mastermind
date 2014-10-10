@@ -33,8 +33,6 @@ class MastermindPlay
     writer.goodbye
   end
 
-
-
   class Writer
     attr_reader :output_stream
     def initialize(output_stream=$stdout)

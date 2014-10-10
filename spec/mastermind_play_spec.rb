@@ -92,6 +92,13 @@ describe MastermindPlay::Writer do
     stream.rewind
     expect(stream.read).to eq("I'm sorry, you did not guess correctly. Here's your result: [++..]\n")
   end
+
+  it "should output 'Thank you for playing. Goodbye!'" do
+    stream = StringIO.new
+    MastermindPlay::Writer.new(stream).goodbye
+    stream.rewind
+    expect(stream.read).to eq("Thank you for playing. Goodbye!\n")
+  end
 end
 
 
