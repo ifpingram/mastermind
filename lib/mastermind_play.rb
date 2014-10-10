@@ -73,7 +73,7 @@ class MastermindPlay
     end
 
     def receives_guess
-      input_stream.gets
+      input_stream.gets.chomp
     end
   end
 end

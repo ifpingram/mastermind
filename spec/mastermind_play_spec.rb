@@ -106,6 +106,12 @@ describe MastermindPlay::Reader do
     reader = MastermindPlay::Reader.new(stream)
     expect(reader.receives_guess).to eq('abcd')
   end
+
+  it "chops newline" do
+    stream = StringIO.new("abcd\n")
+    reader = MastermindPlay::Reader.new(stream)
+    expect(reader.receives_guess).to eq('abcd')
+  end
 end
 
 describe MastermindPlay do
