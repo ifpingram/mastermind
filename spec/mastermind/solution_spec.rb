@@ -13,22 +13,22 @@ describe Mastermind::Solution do
 
     it "creates the solution with the first character of 'R' approximately 25% of the time" do
       percentage = (@results['R'] / 1000.0) * 100
-      expect(percentage).to be_within(2).of(25)
+      expect(percentage).to be_within(4).of(25)
     end
 
     it "creates the solution with the first character of 'G' approximately 25% of the time" do
       percentage = (@results['G'] / 1000.0) * 100
-      expect(percentage).to be_within(2).of(25)
+      expect(percentage).to be_within(4).of(25)
     end
 
     it "creates the solution with the first character of 'B' approximately 25% of the time" do
       percentage = (@results['B'] / 1000.0) * 100
-      expect(percentage).to be_within(2).of(25)
+      expect(percentage).to be_within(4).of(25)
     end
 
     it "creates the solution with the first character of 'O' approximately 25% of the time" do
       percentage = (@results['O'] / 1000.0) * 100
-      expect(percentage).to be_within(2).of(25)
+      expect(percentage).to be_within(4).of(25)
     end
   end
 
