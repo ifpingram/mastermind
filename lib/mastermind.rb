@@ -1,6 +1,6 @@
-require 'mastermind/solution'
-require 'mastermind/reader'
-require 'mastermind/writer'
+require './mastermind/solution'
+require './mastermind/reader'
+require './mastermind/writer'
 
 class Mastermind
   class InvalidInputTypeException < StandardError; end
