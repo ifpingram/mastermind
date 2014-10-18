@@ -33,15 +33,9 @@ describe Mastermind do
     let(:reader_mock) { double('reader_mock').as_null_object }
     let(:solution_mock) { double('solution_mock').as_null_object }
     let(:game) { Mastermind.new(writer_mock, reader_mock, solution_mock) }
-    let(:mastermind) { double('mastermind_mock').as_null_object }
 
     before do
-      allow(Mastermind).to receive(:new).and_return(mastermind)
-    end
-
-    it "creates a new Mastermind object" do
-      expect(Mastermind).to receive(:new)
-      game.play
+      allow(game).to receive(:is_guess_correct?).and_return(true)
     end
 
     it "welcomes us to a new game" do
@@ -60,7 +54,7 @@ describe Mastermind do
     end
 
     it "attempts the guess against the Mastermind instance's solution" do
-      expect(mastermind).to receive(:is_guess_correct?)
+      expect(game).to receive(:is_guess_correct?)
       game.play
     end
 
@@ -69,23 +63,23 @@ describe Mastermind do
       game.play
     end
 
-    xcontext "making a valid guess" do
+    context "making a valid guess" do
 
       it "tells us our guess was correct" do
-        allow(mastermind).to receive(:is_guess_correct?).and_return(true)
+        allow(game).to receive(:is_guess_correct?).and_return(true)
         expect(writer_mock).to receive(:guess_was_correct)
         expect(writer_mock).to_not receive(:guess_was_incorrect)
         game.play
       end
     end
 
-    xcontext "making a invalid guess" do
+    context "making a invalid guess" do
 
       let(:guess_result) { 'foo' }
 
       it "tells us our guess was incorrect" do
-        allow(mastermind).to receive(:is_guess_correct?).exactly(2).times.and_return(false,true)
-        allow(mastermind).to receive(:show_guess_result).exactly(2).times.and_return(guess_result)
+        allow(game).to receive(:is_guess_correct?).exactly(2).times.and_return(false,true)
+        allow(game).to receive(:show_guess_result).exactly(2).times.and_return(guess_result)
         expect(writer_mock).to receive(:guess_was_incorrect).exactly(1).times.with(guess_result)
         game.play
       end
@@ -107,7 +101,7 @@ describe Mastermind do
     end
   end
 
-  xcontext "testing input exception paths" do
+  context "testing input exception paths" do
     let(:mastermind) {Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:choices => 'RGBY', :length => 4}))}
 
     it "raises a InvalidInputTypeException if an empty array is attempted" do
@@ -123,7 +117,7 @@ describe Mastermind do
     end
   end
 
-  xcontext "outputting formatted counted matches" do
+  context "outputting formatted counted matches" do
     it "outputs '.' when the input is {:no_match => 1}" do
       expect(Mastermind.new.format_counted_matches({:no_match=>1})).to eq('.')
     end
@@ -149,7 +143,7 @@ describe Mastermind do
     end
   end
 
-  xcontext "remembering match type counts" do
+  context "remembering match type counts" do
     it "finds 0 :match_color_and_position, 0 :match_color_not_position, 4 no_match when it receives an array of 4 :no_matches" do
       expect(Mastermind.new.count_matches([:no_match, :no_match, :no_match, :no_match]))
         .to eq({:match_color_and_position => 0, :match_color_not_position => 0, :no_match => 4})
@@ -171,17 +165,17 @@ describe Mastermind do
     end
   end
 
-  xcontext "making guesses: 1 slot, 1 color" do
+  context "making guesses: 1 slot, 1 color" do
     it "outputs correct color and position when the guess is correct" do
-      expect(Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:choices => 'G', :length => 1})).check('G')).to eq([:match_color_and_position])
+      expect(Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:solution => 'G', :length => 1})).check('G')).to eq([:match_color_and_position])
     end
 
     it "outputs no match when the guess is incorrect" do
-      expect(Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:choices => 'G', :length => 1})).check('R')).to eq([:no_match])
+      expect(Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:solution => 'G', :length => 1})).check('R')).to eq([:no_match])
     end
   end
 
-  xcontext "making guesses: 2 slots, 4 colors" do
+  context "making guesses: 2 slots, 4 colors" do
     it "outputs correct color and position when the guess is correct" do
       allow_any_instance_of(Array).to receive(:shuffle) { ['R', 'G'] }
       expect(Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:choices => 'RG', :length => 2})).check('RG')).to eq([:match_color_and_position, :match_color_and_position])
@@ -199,7 +193,7 @@ describe Mastermind do
 
   end
 
-  xcontext "making guesses: 3 slots, 4 colors" do
+  context "making guesses: 3 slots, 4 colors" do
     it "outputs [:match_color_not_position, :match_color_not_position, :match_color_not_position] when solution is 'RGR' and guess is 'GRG'" do
       allow_any_instance_of(Array).to receive(:shuffle) { ['R', 'G', 'B', 'Y'] }
       expect(Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:choices => 'RGB', :length => 3})).check('BRG')).to eq([:match_color_not_position, :match_color_not_position, :match_color_not_position])
