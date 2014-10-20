@@ -33,6 +33,12 @@ describe Mastermind::Writer do
     expect(stream.read).to eq("I'm sorry, you did not guess correctly. Here's your result: [++..]\n")
   end
 
+  it "should output that your guess was of the wrong data type" do
+    writer.input_type_error
+    stream.rewind
+    expect(stream.read).to eq("You can only enter String data types\n")
+  end
+
   it "should output 'Thank you for playing. Goodbye!'" do
     writer.goodbye
     stream.rewind
