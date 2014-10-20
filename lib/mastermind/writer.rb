@@ -33,6 +33,14 @@ class Mastermind
       output_stream.puts "You can only enter String data types"
     end
 
+    def input_length_error
+      output_stream.puts "Please only enter a 4 character guess"
+    end
+
+    def input_character_error
+      output_stream.puts "Please only use the following characters: RGBY"
+    end
+
     def goodbye
       output_stream.puts 'Thank you for playing. Goodbye!'
     end

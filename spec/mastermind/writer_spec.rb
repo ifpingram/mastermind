@@ -39,6 +39,18 @@ describe Mastermind::Writer do
     expect(stream.read).to eq("You can only enter String data types\n")
   end
 
+  it "should output that your guess was of the wrong length" do
+    writer.input_length_error
+    stream.rewind
+    expect(stream.read).to eq("Please only enter a 4 character guess\n")
+  end
+
+  it "should output that your guess was using the wrong characters" do
+    writer.input_character_error
+    stream.rewind
+    expect(stream.read).to eq("Please only use the following characters: RGBY\n")
+  end
+
   it "should output 'Thank you for playing. Goodbye!'" do
     writer.goodbye
     stream.rewind
