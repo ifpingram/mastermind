@@ -41,8 +41,10 @@ class Mastermind
         writer.guess_was_incorrect(show_guess_result) # show_guess_result => '....', '+@.+'
         return false
       end
-    rescue Mastermind::InvalidInputTypeException
+    rescue Mastermind::InvalidInputLengthException
       writer.input_length_error
+    #rescue other
+
     end
   end
 
