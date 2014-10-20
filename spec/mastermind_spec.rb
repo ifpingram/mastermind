@@ -104,19 +104,19 @@ describe Mastermind do
       it "tells us that the guess was the wrong data type" do
         allow(game).to receive(:is_guess_correct?).and_raise(Mastermind::InvalidInputTypeException)
         expect(writer_mock).to receive(:input_type_error)
-        game.play
+        game.make_guess
       end
 
       it "tells us that the guess was the wrong length" do
         allow(game).to receive(:is_guess_correct?).and_raise(Mastermind::InvalidInputLengthException)
         expect(writer_mock).to receive(:input_length_error)
-        game.play
+        game.make_guess
       end
 
       it "tells us that the guess was using the wrong characters" do
         allow(game).to receive(:is_guess_correct?).and_raise(Mastermind::InvalidInputCharacterException)
         expect(writer_mock).to receive(:input_character_error)
-        game.play
+        game.make_guess
       end
     end
   end
