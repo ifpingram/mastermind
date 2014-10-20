@@ -33,14 +33,17 @@ class Mastermind
     writer.prompt_for_guess
     guess = reader.receive_guess
     # verify input and output error message if there was an error/exception
-    if is_guess_correct?(guess)
-      writer.guess_was_correct
-      return true
-    else
-      writer.guess_was_incorrect(show_guess_result) # show_guess_result => '....', '+@.+'
-      return false
+    begin
+      if is_guess_correct?(guess)
+        writer.guess_was_correct
+        return true
+      else
+        writer.guess_was_incorrect(show_guess_result) # show_guess_result => '....', '+@.+'
+        return false
+      end
+    rescue Mastermind::InvalidInputTypeException
+      writer.input_length_error
     end
-    # writer.you_had_an_error
   end
 
   def is_guess_correct? guess

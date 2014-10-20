@@ -102,6 +102,7 @@ describe Mastermind do
 
     context "error handling" do
       it "tells us that the guess was the wrong length" do
+        allow(game).to receive(:is_guess_correct?).and_raise(Mastermind::InvalidInputTypeException)
         expect(writer_mock).to receive(:input_length_error)
         game.play
       end
