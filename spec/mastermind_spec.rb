@@ -84,18 +84,25 @@ describe Mastermind do
         game.play
       end
 
-      it "tells asks us to guess again" do
+      it "tells us to guess again" do
         expect(game).to receive(:make_guess).exactly(2).times.and_return(false, true)
         game.play
       end
 
-      it "tells asks us to guess again and again and again" do
+      it "tells us to guess again and again and again" do
         expect(game).to receive(:make_guess).exactly(3).times.and_return(false, false, true)
         game.play
       end
 
-      it "tells asks us to guess again and again and again and again and again and again and again" do
+      it "tells us to guess again and again and again and again and again and again and again" do
         expect(game).to receive(:make_guess).exactly(7).times.and_return(false, false, false, false, false, false, true)
+        game.play
+      end
+    end
+
+    context "error handling" do
+      it "tells us that the guess was the wrong length" do
+        expect(writer_mock).to receive(:input_length_error)
         game.play
       end
     end
@@ -114,6 +121,14 @@ describe Mastermind do
 
     it "raises a InvalidInputCharacterException if an incorrect attempt character is used" do
       expect{mastermind.is_guess_correct?('RBOP')}.to raise_error(Mastermind::InvalidInputCharacterException)
+    end
+  end
+
+  xcontext "outputting friendly exception messages and continuing the game" do
+    let(:mastermind) {Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:choices => 'RGBY', :length => 4}))}
+
+    it "says  if an empty array is attempted" do
+      expect{mastermind.is_guess_correct?([])}.to raise_error(Mastermind::InvalidInputTypeException)
     end
   end
 

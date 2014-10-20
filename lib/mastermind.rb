@@ -1,6 +1,6 @@
-require './mastermind/solution'
-require './mastermind/reader'
-require './mastermind/writer'
+require 'mastermind/solution'
+require 'mastermind/reader'
+require 'mastermind/writer'
 
 class Mastermind
   class InvalidInputTypeException < StandardError; end
@@ -9,7 +9,7 @@ class Mastermind
 
   attr_accessor :solution, :writer, :reader
 
-  def initialize(writer = Mastermind::Writer.new, reader = Mastermind::Reader.new, solution=Mastermind::Solution.new({:choices => 'RBGY', :length => 4}))
+  def initialize(writer = Mastermind::Writer.new, reader = Mastermind::Reader.new, solution=Mastermind::Solution.new({:choices => 'RBGYO', :length => 4}))
     @solution = solution
     @writer = writer
     @reader = reader
@@ -32,6 +32,7 @@ class Mastermind
   def make_guess
     writer.prompt_for_guess
     guess = reader.receive_guess
+    # verify input and output error message if there was an error/exception
     if is_guess_correct?(guess)
       writer.guess_was_correct
       return true
@@ -39,6 +40,7 @@ class Mastermind
       writer.guess_was_incorrect(show_guess_result) # show_guess_result => '....', '+@.+'
       return false
     end
+    # writer.you_had_an_error
   end
 
   def is_guess_correct? guess
