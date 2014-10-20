@@ -43,8 +43,8 @@ class Mastermind
       end
     rescue Mastermind::InvalidInputLengthException
       writer.input_length_error
-    #rescue other
-
+    rescue Mastermind::InvalidInputCharacterException
+      writer.input_character_error
     end
   end
 
