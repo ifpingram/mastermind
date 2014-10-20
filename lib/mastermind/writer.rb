@@ -29,7 +29,9 @@ class Mastermind
       output_stream.puts "I'm sorry, you did not guess correctly. Here's your result: [#{result_output}]"
     end
 
-
+    def input_type_error
+      output_stream.puts "You can only enter String data types"
+    end
 
     def goodbye
       output_stream.puts 'Thank you for playing. Goodbye!'
