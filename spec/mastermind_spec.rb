@@ -18,10 +18,10 @@ describe Mastermind do
      ['RGBY','ACDE',false,'....'],
     ].each do |solution_attempt_output|
       it "outputs '#{solution_attempt_output[2]}' when the solution is '#{solution_attempt_output[0]}' and the guess is '#{solution_attempt_output[1]}'" do
-        expect(Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:solution => solution_attempt_output[0]})).is_guess_correct?(solution_attempt_output[1])).to eq(solution_attempt_output[2])
+        expect(Mastermind.new(nil, nil, Mastermind::Solution.new({:solution => solution_attempt_output[0]})).is_guess_correct?(solution_attempt_output[1])).to eq(solution_attempt_output[2])
       end
       it "outputs '#{solution_attempt_output[3]}' when the solution is '#{solution_attempt_output[0]}' and the guess is '#{solution_attempt_output[1]}'" do
-        mastermind = Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:solution => solution_attempt_output[0]}))
+        mastermind = Mastermind.new(nil, nil, Mastermind::Solution.new({:solution => solution_attempt_output[0]}))
         mastermind.is_guess_correct?(solution_attempt_output[1])
         expect(mastermind.show_guess_result).to eq(solution_attempt_output[3])
       end
@@ -137,11 +137,13 @@ describe Mastermind do
     end
   end
 
-  xcontext "outputting friendly exception messages and continuing the game" do
-    let(:mastermind) {Mastermind.new(Mastermind::Writer, Mastermind::Reader, Mastermind::Solution.new({:choices => 'RGBY', :length => 4}))}
+  context "exiting the game" do
+    reader_stream = StringIO.new('exit')
+    reader = Mastermind::Reader.new(reader_stream)
+    let(:mastermind) {Mastermind.new(Mastermind::Writer.new, reader, Mastermind::Solution.new({:choices => 'RGBY', :length => 4}))}
 
-    it "says  if an empty array is attempted" do
-      expect{mastermind.is_guess_correct?([])}.to raise_error(Mastermind::InvalidInputTypeException)
+    it "says goodbye when the guess is 'exit'" do
+      expect(mastermind.make_guess()).to eq(true)
     end
   end
 

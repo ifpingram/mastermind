@@ -34,6 +34,8 @@ class Mastermind
   def make_guess
     writer.prompt_for_guess
     guess = reader.receive_guess
+    return true if guess == 'exit'
+
     # verify input and output error message if there was an error/exception
     begin
       if is_guess_correct?(guess)

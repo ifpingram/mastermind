@@ -15,6 +15,7 @@ class Mastermind
       output_stream.puts 'B -> Blue'
       output_stream.puts 'Y -> Yellow'
       output_stream.puts 'O -> Orange'
+      output_stream.puts 'Type exit to quit'
     end
 
     def prompt_for_guess

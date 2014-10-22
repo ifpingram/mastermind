@@ -6,7 +6,7 @@ describe Mastermind::Writer do
   it "should output the welcome text when it receives the welcome message" do
     writer.welcome
     stream.rewind
-    expect(stream.read).to eq("Welcome to Mastermind!\nI have created a 4 character solution for you to guess, using the following colors:\nR -> Red\nG -> Green\nB -> Blue\nY -> Yellow\nO -> Orange\n")
+    expect(stream.read).to eq("Welcome to Mastermind!\nI have created a 4 character solution for you to guess, using the following colors:\nR -> Red\nG -> Green\nB -> Blue\nY -> Yellow\nO -> Orange\nType exit to quit\n")
   end
 
   it "should output the enter your guess prompt" do
